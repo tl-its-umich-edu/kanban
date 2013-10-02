@@ -1,0 +1,84 @@
+
+.special-heading{
+	position:fixed;
+	height:100px;
+	top:0;
+	left:0;
+	right:0;
+	z-index:1;
+}
+
+li {
+	list-style: none;
+	padding-right: 200px;
+	margin:0;
+}
+	
+
+.ToDoPanel ul,.InProgress ul,.Review ul{
+	border: 1px solid #ccc;
+	border-radius: 5px 5px 5px 5px;
+}
+
+.body-div{
+    float: left;
+	overflow: auto;
+}
+
+#wait-div{
+	margin-left: auto;
+	margin-right: auto;
+	width: 25%;
+}
+
+.list-group-item:hover{
+	background-color: #E9E9E9;
+}
+
+.assignee-style{
+	color:#333333;
+}
+.reporter-style{
+	color:#716B7A;
+}
+
+.priority-style{
+	color:#716B00;
+}
+
+.label-none{
+	background-color:white;
+}
+
+.otherSiteSearch{
+    float: left;
+	display:block;
+	height:25px;
+    padding-bottom:40px;
+	padding-left:18px;
+	padding-top:100px;
+}
+.assigneeSearch{
+    float: left;
+    clear: right;
+	display:block;
+	height:25px;
+    padding-bottom:40px;
+	padding-left:18px;
+	padding-top:100px;
+}
+.counter{
+	  margin:0 auto 0 auto;
+      padding:3px;
+      border:1px solid #cccccc;
+      background:#ffffff; 
+}
+.counter-tablet{
+	  margin:0 auto 0 auto;
+      padding:3px;
+      background:#ffffff; 
+}
+
+.tablet-misc{
+	padding-left:20px;
+}
