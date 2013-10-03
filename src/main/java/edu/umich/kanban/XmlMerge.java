@@ -52,9 +52,11 @@ public class XmlMerge {
 		Document doc = builder.parse(new InputSource(new StringReader(sakai)));
 		Document docIts = builder.parse(new InputSource(new StringReader(its)));
       
+		NodeList nodesSakai = doc.getElementsByTagName("item");
 		NodeList nodesIts = docIts.getElementsByTagName("item");
 		for (int i = 0; i < nodesIts.getLength(); i++) {
-		    Node n = (Node) doc.importNode(nodesIts.item(i), true);
+			 Node n = (Node) doc.importNode(nodesIts.item(i), true);
+			 nodesSakai.item(0).getParentNode().appendChild(n);
 		}
 		Transformer transformer = TransformerFactory.newInstance()
 				.newTransformer();
