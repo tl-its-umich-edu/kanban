@@ -34,16 +34,32 @@
 					</li>
 				</ul>
 			</div>
+			
+			<!-- group the search boxes -->
+			<div id="searchBar3" class="searchBar3">
 			<div id="otherSiteSearch" class="otherSiteSearch">
-				<label for="txtSearch"> Search on the page </label> 
-				<input id="txtSearch" name="txtSearch" maxlength="50" type="text">
+			  <label for="txtSearch"> Search on the page </label> 
+			  <input id="txtSearch" name="txtSearch" maxlength="50" type="text">
 			</div>
 
 			<div id="assigneeSearch" class="assigneeSearch">
 			  <label for="assigneeSearch"> Search by assignee </label> 
 			  <input id="assigneeSearchTxt" name="assigneeSearch" maxlength="50" type="text">
 			</div>
+
+			<div id="prioritySearch" class="prioritySearch">
+			  <label for="prioritySearch"> Search by priority </label> 
+			  <input id="prioritySearchTxt" name="prioritySearch" maxlength="50" type="text">
+			</div>
 			
+			<div id="reporterSearch" class="reporterSearch">
+			  <label for="reporterSearch"> Search by reporter </label> 
+			  <input id="reporterSearchTxt" name="reporterSearch" maxlength="50" type="text">
+			</div>
+			
+			</div>
+
+			<!-- create ticket buttons -->
 			<div id="createTicket" class="createTicket" >
 			  <label for="createTicket"> Create Ticket </label>
 			 <input type="button" value="ITS Jira" onclick="window.open('https://jira.it.umich.edu/secure/CreateIssue!default.jspa')">

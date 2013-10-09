@@ -1,16 +1,47 @@
 /**
- * @author Gundala, Pushyami
+ * @author CTools development group
  */
-$(document).ready(function() {
 
-    console.log("doc ready");
+/* TTD: (Things To Do)
+- make search restrictions cumulative.
+- use functions to avoid duplication when making search functions.
 
+*/
+
+
+var debugMsg = function(msg) {
+    // uncomment line if want debug messages
+    //console.log("dbM: ",msg);
+}
+
+var resetSearch = function(tag){
+    debugMsg("resetSearch tag: "+tag);
+    $(tag).val('');
+    $('.list-group-item').show();
+}
+
+var resetSearchAll = function() {
+    resetSearch('#txtSearch');
+    resetSearch('#assigneeSearchTxt');
+    resetSearch('#prioritySearchTxt');
+    resetSearch('#reporterSearchTxt');
+}
+
+var resetSearchBoxes = function() {
     $('#txtSearch').val('');
     $('#assigneeSearchTxt').val('');
+    $('#prioritySearchTxt').val('');
+    $('#reporterSearchTxt').val('');
+}
 
-    //JIRA DATA MANUPILATIONS
+$(document).ready(function() {
+
+    resetSearchAll();
+
+    //JIRA DATA MANIPULATIONS
     var itemsTodo ="", inProgress ="", review = ""; 
     var cTodo=0, cProgress=0, cReview=0;
+
     $.getJSON('/kanban/jirarequest','OK', function(jiraData) {
  	document.getElementById("wait-div").style.display = 'none';
         $.each(jiraData, function(i, data) {
@@ -32,12 +63,12 @@ $(document).ready(function() {
 
         });
         $.getJSON('/kanban/jirarequest','wip',function(wipResult){
-     	   $.each(wipResult, function(i, wipQ) {
-     		   $("<span id='cTodo' class='counter'>"+wipQ.todo+"</span>").appendTo('#todo-li');
-     		   $("<span id='cProgress' class='counter'>"+wipQ.inprogress+"</span>").appendTo('#inprogress-li');
-     		   $("<span id='cReview' class='counter'>"+wipQ.review+"</span>").appendTo('#review-li');
-     	   });
-         });
+     	    $.each(wipResult, function(i, wipQ) {
+     		$("<span id='cTodo' class='counter'>"+wipQ.todo+"</span>").appendTo('#todo-li');
+     		$("<span id='cProgress' class='counter'>"+wipQ.inprogress+"</span>").appendTo('#inprogress-li');
+     		$("<span id='cReview' class='counter'>"+wipQ.review+"</span>").appendTo('#review-li');
+     	    });
+        });
         $("<span id='cTodo' class='counter'>"+cTodo+"</span>").appendTo('#todo-li');
         $("<span id='cProgress' class='counter'>"+cProgress+"</span>").appendTo('#inprogress-li');
         $("<span id='cReview' class='counter'>"+cReview+"</span>").appendTo('#review-li');
@@ -45,7 +76,7 @@ $(document).ready(function() {
         $("<h4>In Progress("+cProgress+")</h4>").appendTo("#tablet-inprogress");
         $("<h4>Review("+cReview+")</h4>").appendTo("#tablet-review");
 
-	console.log("end of json request processing");
+	debugMsg("end of json request processing");
     });
 
 
@@ -67,26 +98,62 @@ $(document).ready(function() {
 
     // search for text from text field
     $('#txtSearch').keyup(function(event){
+
+	resetSearch('#assigneeSearchTxt');
+	resetSearch('#prioritySearchTxt');
+	resetSearch('#reporterSearchTxt');
+
 	searchForText($('#txtSearch').val());
 
 	if (event.keyCode == 27) {
-            resetSearch('#txtSearch');
+	    resetSearch('#txtSearch');
         }
     });
 
     $('#assigneeSearchTxt').keyup(function(event){
+
+	resetSearch('#txtSearch');
+	resetSearch('#prioritySearchTxt');
+	resetSearch('#reporterSearchTxt');
+
 	searchForText('Assignee: '+$('#assigneeSearchTxt').val());
 
 	if (event.keyCode == 27) {
-            resetSearch('#assigneeSearchTxt');
+	    resetSearch('#assigneeSearchTxt');
+        }
+    });
+
+    $('#prioritySearchTxt').keyup(function(event){
+
+	resetSearch('#txtSearch');
+	resetSearch('#assigneeSearchTxt');
+	resetSearch('#reporterSearchTxt');
+
+	searchForText('Priority: '+$('#prioritySearchTxt').val());
+
+	if (event.keyCode == 27) {
+	    resetSearch('#prioritySearchTxt');
+        }
+    });
+
+    $('#reporterSearchTxt').keyup(function(event){
+
+	resetSearch('#txtSearch');
+	resetSearch('#assigneeSearchTxt');
+	resetSearch('#prioritySearchTxt');
+
+	searchForText('Reporter: '+$('#reporterSearchTxt').val());
+
+	if (event.keyCode == 27) {
+	    resetSearch('#reporterySearchTxt');
         }
     });
 
     // search items for specific text
     var searchForText = function(textToFind) {
-	console.log("sFT: ",textToFind);
+	debugMsg("sFT: "+textToFind);
         // reset all counts
-  //      var cTodo=0, cProgress=0, cReview=0;
+	var cTodo=0, cProgress=0, cReview=0;
 
         if (textToFind.length > 0) {
 
@@ -94,14 +161,13 @@ $(document).ready(function() {
             $('.list-group-item').hide();
             $('.list-group-item:Contains(\'' + textToFind          + '\')').show();
 	    
-	    // appear to have never worked.
 	    // calculate number of entries in each group.
-            // cTodo = $('.list-group-item:Contains(\'' + textToFind          + '\'):Contains("todo-label")').length ;
-	    // cProgress = $('.list-group-item:Contains(\'' + textToFind          + '\'):Contains("inprogress-label")').length;
-	    // cReview = $('.list-group-item:Contains(\'' + textToFind          + '\'):Contains("review-label")').length;
-	    // $('#cTodo').html(cTodo);
-	    // $('#cProgress').html(cProgress);
-	    // $('#cReview').html(cReview);
+            cTodo = $('.list-group-item:Contains(\'' + textToFind          + '\'):Contains("todo-label")').length ;
+	    cProgress = $('.list-group-item:Contains(\'' + textToFind          + '\'):Contains("inprogress-label")').length;
+	    cReview = $('.list-group-item:Contains(\'' + textToFind          + '\'):Contains("review-label")').length;
+	    $('#cTodo').html(cTodo);
+	    $('#cProgress').html(cProgress);
+	    $('#cReview').html(cReview);
 	}
 
 	if (textToFind.length == 0) {
@@ -114,18 +180,6 @@ $(document).ready(function() {
     $.expr[':'].Contains = function(a, i, m){
 	return $(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
     };
-
-    function resetSearch(tag){
-	$(tag).val('');
-	$('.list-group-item').show();
-	$(tag).focus();
-    }
-
-    // function resetSearch(){
-    // 	$('#txtSearch').val('');
-    // 	$('.list-group-item').show();
-    // 	$('#txtSearch').focus();
-    // }
 
     // supply and format the basic data common to each column.
     function baseTaskFields (data, label, labelClass) {
@@ -140,4 +194,5 @@ $(document).ready(function() {
 	return taskString;
     }
 
+    
 });
