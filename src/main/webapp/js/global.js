@@ -8,6 +8,14 @@
 
 */
 
+/*
+remove matching element from array
+var index = array.indexOf(item);
+array.splice(index, 1);
+
+shallow copy of array
+var clone = myArray.slice(0);
+*/
 
 var debugMsg = function(msg) {
     // uncomment line if want debug messages
@@ -102,6 +110,7 @@ $(document).ready(function() {
 	resetSearch('#assigneeSearchTxt');
 	resetSearch('#prioritySearchTxt');
 	resetSearch('#reporterSearchTxt');
+	resetSearch('#projectKeySearchTxt');
 
 	searchForText($('#txtSearch').val());
 
@@ -112,9 +121,10 @@ $(document).ready(function() {
 
     $('#assigneeSearchTxt').keyup(function(event){
 
-	resetSearch('#txtSearch');
+	resetSearch('#txtSearchp');
 	resetSearch('#prioritySearchTxt');
 	resetSearch('#reporterSearchTxt');
+	resetSearch('#projectKeySearchTxt');
 
 	searchForText('Assignee: '+$('#assigneeSearchTxt').val());
 
@@ -128,6 +138,7 @@ $(document).ready(function() {
 	resetSearch('#txtSearch');
 	resetSearch('#assigneeSearchTxt');
 	resetSearch('#reporterSearchTxt');
+	resetSearch('#projectKeySearchTxt');
 
 	searchForText('Priority: '+$('#prioritySearchTxt').val());
 
@@ -141,11 +152,26 @@ $(document).ready(function() {
 	resetSearch('#txtSearch');
 	resetSearch('#assigneeSearchTxt');
 	resetSearch('#prioritySearchTxt');
+	resetSearch('#projectKeySearchTxt');
 
 	searchForText('Reporter: '+$('#reporterSearchTxt').val());
 
 	if (event.keyCode == 27) {
-	    resetSearch('#reporterySearchTxt');
+	    resetSearch('#reporterSearchTxt');
+        }
+    });
+
+    $('#projectKeySearchTxt').keyup(function(event){
+
+	resetSearch('#txtSearch');
+	resetSearch('#assigneeSearchTxt');
+	resetSearch('#prioritySearchTxt');
+	resetSearch('#reporterSearchTxt');
+
+	searchForText('ProjectKey: '+$('#projectKeySearchTxt').val());
+
+	if (event.keyCode == 27) {
+	    resetSearch('#projectKeySearchTxt');
         }
     });
 
@@ -189,6 +215,7 @@ $(document).ready(function() {
             "<span class='assignee-style'>Assignee: "+data.assignee+"</span><br/>" +
             "<span class='reporter-style'>Reporter: "+data.reporter+"</span><br/>" +
             "<span class='priority-style'>Priority: "+data.priority+"</span><br/>" + 
+            "<span class='projectKey-style'>ProjectKey: "+data.projectKey+"</span><br/>" + 
             "<span style='display:none'>" + label+"</span>" + 
             "<span id='" +label + "' class ='"+labelClass+"'>"+data.labels+"</span></li>"
 	return taskString;

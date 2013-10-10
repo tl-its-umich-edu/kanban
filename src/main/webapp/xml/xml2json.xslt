@@ -49,6 +49,11 @@
 <xsl:text>",</xsl:text>
 
 <xsl:text>
+"projectKey" : "</xsl:text>
+<xsl:value-of select="project/@key"/>
+<xsl:text>",</xsl:text>
+
+<xsl:text>
 "priority" : "</xsl:text>
 <xsl:value-of select="priority"/>
 <xsl:text>",</xsl:text>

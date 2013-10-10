@@ -56,19 +56,14 @@ li {
     float: left;
     display:block;
     height:25px;
-    padding-bottom:40px;
-    padding-left:18px;
-    padding-top:100px;
 }
 
 .assigneeSearch{
+
     float: left;
     clear: right;
     display:block;
     height:25px;
-    padding-bottom:40px;
-    padding-left:18px;
-    padding-top:100px;
 }
 
 .prioritySearch{
@@ -76,9 +71,7 @@ li {
     clear: right;
     display:block;
     height:25px;
-    padding-bottom:40px;
-    padding-left:18px;
-    padding-top:100px;
+
 }
 
 .reporterSearch{
@@ -86,19 +79,28 @@ li {
     clear: right;
     display:block;
     height:25px;
-    padding-bottom:40px;
-    padding-left:18px;
-    padding-top:100px;
+
+}
+
+.projectKeySearch{
+    clear: right;
+    display:block;
+    float: left;
+    height:25px;
 }
 
 .searchBar3{
-    float: left;
     background:#d3d3d3;
-    border: black;
     border-style:solid;
     border-width:0px;
-    display:block;
+    border: black;
     clear:right;
+    display:block;
+    float: left;
+    padding-bottom:10px;
+    padding-left:18px;
+    padding-top:100px;
+
 }
 
 .createTicket{
@@ -107,7 +109,7 @@ li {
     height:25px;
     padding-bottom:40px;
     padding-left:18px;
-    padding-top:100px;
+    padding-top:10px;
     clear:right;
 }
 
