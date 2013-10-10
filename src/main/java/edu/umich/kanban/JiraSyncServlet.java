@@ -9,11 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import java.util.logging.Logger;
+
+
 /**
  * Servlet implementation class JiraSyncServlet
  */
 public class JiraSyncServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static Log M_log = LogFactory.getLog(JiraSyncServlet.class);
 
    
     public JiraSyncServlet() {
@@ -59,7 +65,8 @@ public class JiraSyncServlet extends HttpServlet {
 		
 		private void dataOutput(PrintWriter out, String mergeFiles) {
 			out.println(mergeFiles);
-		    out.close();
+			M_log.debug("merged json: "+mergeFiles);
+			out.close();
 		}
 
 	/**
