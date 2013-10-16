@@ -3,43 +3,53 @@
  */
 
 /* TTD: (Things To Do)
-- make search restrictions cumulative.
-- use functions to avoid duplication when making search functions.
+   - make search restrictions cumulative.
+   - use functions to avoid duplication when making search functions.
 
 */
 
-/*
-remove matching element from array
-var index = array.indexOf(item);
-array.splice(index, 1);
+var searchFields = [];
 
-shallow copy of array
-var clone = myArray.slice(0);
-*/
+// Return list of the all the search fields 
+// besides the one passed in.
+var otherSearchFields = function(name) {
+    var clone = searchFields.slice(0);
+    var thisNameIndex = clone.indexOf(name);
+    clone.splice(thisNameIndex,1);
+    debugMsg("otherSearchFields: "+clone);
+    return clone;
+};
 
 var debugMsg = function(msg) {
     // uncomment line if want debug messages
-    //console.log("dbM: ",msg);
+    //    console.log("dbM: ",msg);
 }
 
+// Reset display by taking out the search text and show all the items.
 var resetSearch = function(tag){
-    debugMsg("resetSearch tag: "+tag);
+    //    debugMsg("resetSearch tag: "+tag);
     $(tag).val('');
     $('.list-group-item').show();
 }
 
-var resetSearchAll = function() {
-    resetSearch('#txtSearch');
-    resetSearch('#assigneeSearchTxt');
-    resetSearch('#prioritySearchTxt');
-    resetSearch('#reporterSearchTxt');
+// Reset the search info for all the other search fields.
+var resetSearchOther = function(tag) {
+    var searchTag;
+    var arrayCounter = 0;
+    var arrayLength = 0;
+
+    var otherSearchers = otherSearchFields(tag);
+
+    // use revised loop to reset the other search boxes.
+    for (arrayCounter=0, arrayLength = otherSearchers.length; arrayCounter < arrayLength; arrayCounter++) { 
+	debugMsg("atag: "+otherSearchers[arrayCounter]);
+	resetSearch(otherSearchers[arrayCounter]);
+    }
+    return otherSearchers;
 }
 
-var resetSearchBoxes = function() {
-    $('#txtSearch').val('');
-    $('#assigneeSearchTxt').val('');
-    $('#prioritySearchTxt').val('');
-    $('#reporterSearchTxt').val('');
+var resetSearchAll = function() {
+    resetSearchOther();
 }
 
 $(document).ready(function() {
@@ -99,81 +109,51 @@ $(document).ready(function() {
 	    temp = "label label-info";
 	}
 	return temp;
-    }
+    };
 
 
-    //SEARCH CODE
+    //SEARCH CODE methods
 
-    // search for text from text field
-    $('#txtSearch').keyup(function(event){
+    /*
+     * Search on fields based on exact text (to find text) and a 
+     * jquery identifier (to display/hide and format text).
+     */
 
-	resetSearch('#assigneeSearchTxt');
-	resetSearch('#prioritySearchTxt');
-	resetSearch('#reporterSearchTxt');
-	resetSearch('#projectKeySearchTxt');
+    // Pass in jquery identifier and the text to search for.
+    var setupSearchField = function(searchField,prefix) {
 
-	searchForText($('#txtSearch').val());
+	// store the identifer so it can be used when cleaning up
+	// search field display.
 
-	if (event.keyCode == 27) {
-	    resetSearch('#txtSearch');
-        }
-    });
+	searchFields.push(searchField);
+	debugMsg("searchFields: ",searchFields);
 
-    $('#assigneeSearchTxt').keyup(function(event){
+	// create the keyup function to do the search.
 
-	resetSearch('#txtSearchp');
-	resetSearch('#prioritySearchTxt');
-	resetSearch('#reporterSearchTxt');
-	resetSearch('#projectKeySearchTxt');
+	$(searchField).keyup(function(event){
 
-	searchForText('Assignee: '+$('#assigneeSearchTxt').val());
+	    resetSearchOther(searchField);
+	    searchForText(prefix+$(searchField).val());
 
-	if (event.keyCode == 27) {
-	    resetSearch('#assigneeSearchTxt');
-        }
-    });
+	    if (event.keyCode == 27) {
+		resetSearch(searchField);
+            }
+	})
+    };
 
-    $('#prioritySearchTxt').keyup(function(event){
+    // Add the jquery id and text to search for.
 
-	resetSearch('#txtSearch');
-	resetSearch('#assigneeSearchTxt');
-	resetSearch('#reporterSearchTxt');
-	resetSearch('#projectKeySearchTxt');
+    // To add search still need to:
+    // - add to searchField list above, 
+    // - have spot on index.html, 
+    // - and have entry in css,
+    // - be in xslt
 
-	searchForText('Priority: '+$('#prioritySearchTxt').val());
-
-	if (event.keyCode == 27) {
-	    resetSearch('#prioritySearchTxt');
-        }
-    });
-
-    $('#reporterSearchTxt').keyup(function(event){
-
-	resetSearch('#txtSearch');
-	resetSearch('#assigneeSearchTxt');
-	resetSearch('#prioritySearchTxt');
-	resetSearch('#projectKeySearchTxt');
-
-	searchForText('Reporter: '+$('#reporterSearchTxt').val());
-
-	if (event.keyCode == 27) {
-	    resetSearch('#reporterSearchTxt');
-        }
-    });
-
-    $('#projectKeySearchTxt').keyup(function(event){
-
-	resetSearch('#txtSearch');
-	resetSearch('#assigneeSearchTxt');
-	resetSearch('#prioritySearchTxt');
-	resetSearch('#reporterSearchTxt');
-
-	searchForText('ProjectKey: '+$('#projectKeySearchTxt').val());
-
-	if (event.keyCode == 27) {
-	    resetSearch('#projectKeySearchTxt');
-        }
-    });
+    setupSearchField('#txtSearch','');
+    setupSearchField('#assigneeSearchTxt','Assignee: ');
+    setupSearchField('#prioritySearchTxt','Priority: ');
+    setupSearchField('#reporterSearchTxt','Reporter: ');
+    setupSearchField('#projectKeySearchTxt','ProjectKey: ');
 
     // search items for specific text
     var searchForText = function(textToFind) {
@@ -185,12 +165,12 @@ $(document).ready(function() {
 
 	    // hide things but then show items with matching text.
             $('.list-group-item').hide();
-            $('.list-group-item:Contains(\'' + textToFind          + '\')').show();
+            $('.list-group-item:Contains(\'' + textToFind + '\')').show();
 	    
 	    // calculate number of entries in each group.
-            cTodo = $('.list-group-item:Contains(\'' + textToFind          + '\'):Contains("todo-label")').length ;
-	    cProgress = $('.list-group-item:Contains(\'' + textToFind          + '\'):Contains("inprogress-label")').length;
-	    cReview = $('.list-group-item:Contains(\'' + textToFind          + '\'):Contains("review-label")').length;
+            cTodo = $('.list-group-item:Contains(\'' + textToFind + '\'):Contains("todo-label")').length ;
+	    cProgress = $('.list-group-item:Contains(\'' + textToFind + '\'):Contains("inprogress-label")').length;
+	    cReview = $('.list-group-item:Contains(\'' + textToFind + '\'):Contains("review-label")').length;
 	    $('#cTodo').html(cTodo);
 	    $('#cProgress').html(cProgress);
 	    $('#cReview').html(cReview);
@@ -207,7 +187,7 @@ $(document).ready(function() {
 	return $(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
     };
 
-    // supply and format the basic data common to each column.
+    // supply and format the basic data common to each item.
     function baseTaskFields (data, label, labelClass) {
 	var taskString =
     	    "<li class='list-group-item'>" +
@@ -221,5 +201,5 @@ $(document).ready(function() {
 	return taskString;
     }
 
-    
+
 });
