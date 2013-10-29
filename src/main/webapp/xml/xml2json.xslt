@@ -10,7 +10,7 @@
 <xsl:text>[</xsl:text>
 
 <xsl:for-each select="channel/item">
-<xsl:sort select="assignee"/>
+<xsl:sort select="key"/>
 
 <xsl:text>
 {</xsl:text>

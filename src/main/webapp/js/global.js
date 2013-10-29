@@ -195,9 +195,9 @@ $(document).ready(function() {
             "<span class='assignee-style'>Assignee: "+data.assignee+"</span><br/>" +
             "<span class='reporter-style'>Reporter: "+data.reporter+"</span><br/>" +
             "<span class='priority-style'>Priority: "+data.priority+"</span><br/>" + 
-            "<span class='projectKey-style'>ProjectKey: "+data.projectKey+"</span><br/>" + 
-            "<span style='display:none'>" + label+"</span>" + 
-            "<span id='" +label + "' class ='"+labelClass+"'>"+data.labels+"</span></li>"
+            "<span id='" +label + "' class ='"+labelClass+"'>"+data.labels+"</span>" +
+            "<span style='display:none'>ProjectKey: "+data.projectKey+"</span>" + 
+            "<span style='display:none'>" + label+"</span></li>"
 	return taskString;
     }
 
