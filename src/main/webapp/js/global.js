@@ -59,6 +59,7 @@ $(document).ready(function() {
     //JIRA DATA MANIPULATIONS
     var itemsTodo ="", inProgress ="", review = ""; 
     var cTodo=0, cProgress=0, cReview=0;
+    var counterClass="counter";
 
     $.getJSON('/kanban/jirarequest','OK', function(jiraData) {
    document.getElementById("wait-div").style.display = 'none';
@@ -82,14 +83,26 @@ $(document).ready(function() {
         });
         $.getJSON('/kanban/jirarequest','wip',function(wipResult){
           $.each(wipResult, function(i, wipQ) {
-         $("<span id='cTodo' class='counter'>"+wipQ.todo+"</span>").appendTo('#todo-li');
-         $("<span id='cProgress' class='counter'>"+wipQ.inprogress+"</span>").appendTo('#inprogress-li');
-         $("<span id='cReview' class='counter'>"+wipQ.review+"</span>").appendTo('#review-li');
+            $("<span id='cTodo' class='counterGreen'>"+cTodo+"</span>").appendTo('#todo-li');
+            // we may use wipQ.todo for a 4th column (backlog vs todo) but for now, it's unneeded
+            $("<span id='cTodo' class='counter'>n/a</span>").appendTo('#todo-li');
+             
+            if ( cProgress > wipQ.inprogress )
+               counterClass="counterRed";
+            else
+               counterClass="counterGreen";
+            $("<span id='cProgress' class='"+counterClass+"'>"+cProgress+"</span>").appendTo('#inprogress-li');
+            $("<span id='cProgress' class='counter'>"+wipQ.inprogress+"</span>").appendTo('#inprogress-li');
+            
+            if ( cReview > wipQ.review )
+               counterClass="counterRed";
+            else
+               counterClass="counterGreen";
+            $("<span id='cReview' class='"+counterClass+"'>"+cReview+"</span>").appendTo('#review-li');
+            $("<span id='cReview' class='counter'>"+wipQ.review+"</span>").appendTo('#review-li');
           });
         });
-        $("<span id='cTodo' class='counter'>"+cTodo+"</span>").appendTo('#todo-li');
-        $("<span id='cProgress' class='counter'>"+cProgress+"</span>").appendTo('#inprogress-li');
-        $("<span id='cReview' class='counter'>"+cReview+"</span>").appendTo('#review-li');
+        
         $("<h4>To Do("+cTodo+")</h4>").appendTo("#tablet-todo");
         $("<h4>In Progress("+cProgress+")</h4>").appendTo("#tablet-inprogress");
         $("<h4>Review("+cReview+")</h4>").appendTo("#tablet-review");

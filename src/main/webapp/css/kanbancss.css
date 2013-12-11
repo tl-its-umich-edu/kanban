@@ -119,6 +119,21 @@ li {
     border:1px solid #cccccc;
     background:#ffffff; 
 }
+.counterGreen{
+    margin:0 auto 0 auto;
+    padding:3px;
+    border:1px solid #cccccc;
+    background:#ffffff; 
+    background-color:#A9F59F;
+}
+.counterRed{
+    margin:0 auto 0 auto;
+    padding:3px;
+    border:1px solid #cccccc;
+    background:#ffffff; 
+    background-color:#F5A59F;
+}
+
 .counter-tablet{
     margin:0 auto 0 auto;
     padding:3px;
