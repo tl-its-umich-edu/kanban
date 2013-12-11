@@ -42,8 +42,8 @@ var resetSearchOther = function(tag) {
 
     // use revised loop to reset the other search boxes.
     for (arrayCounter=0, arrayLength = otherSearchers.length; arrayCounter < arrayLength; arrayCounter++) { 
-	debugMsg("atag: "+otherSearchers[arrayCounter]);
-	resetSearch(otherSearchers[arrayCounter]);
+   debugMsg("atag: "+otherSearchers[arrayCounter]);
+   resetSearch(otherSearchers[arrayCounter]);
     }
     return otherSearchers;
 }
@@ -61,31 +61,31 @@ $(document).ready(function() {
     var cTodo=0, cProgress=0, cReview=0;
 
     $.getJSON('/kanban/jirarequest','OK', function(jiraData) {
- 	document.getElementById("wait-div").style.display = 'none';
+   document.getElementById("wait-div").style.display = 'none';
         $.each(jiraData, function(i, data) {
             var labelClass=labelMagic(data);
             
             if ((data.status === "Awaiting Review")||(data.status === "Open")||(data.status === "Reopened")) {
-            	cTodo++;
-            	itemsTodo = baseTaskFields(data, 'todo-label', labelClass);
+               cTodo++;
+               itemsTodo = baseTaskFields(data, 'todo-label', labelClass);
                 $(itemsTodo).appendTo('#inner-body-ul-for-todopanel');
             } else if ((data.status === "In Progress")||(data.status === "Development in Progress")) {
-            	cProgress++;
+               cProgress++;
                 inProgress = baseTaskFields(data, 'inprogress-label', labelClass);
                 $(inProgress).appendTo('#inner-body-ul-for-inprogress');
             } else if((data.status==="Resolved")||(data.status==="QA Testing")){
-            	cReview++;
+               cReview++;
                 review = baseTaskFields(data, 'review-label', labelClass);
                 $(review).appendTo('#inner-body-ul-for-review');
             }
 
         });
         $.getJSON('/kanban/jirarequest','wip',function(wipResult){
-     	    $.each(wipResult, function(i, wipQ) {
-     		$("<span id='cTodo' class='counter'>"+wipQ.todo+"</span>").appendTo('#todo-li');
-     		$("<span id='cProgress' class='counter'>"+wipQ.inprogress+"</span>").appendTo('#inprogress-li');
-     		$("<span id='cReview' class='counter'>"+wipQ.review+"</span>").appendTo('#review-li');
-     	    });
+          $.each(wipResult, function(i, wipQ) {
+         $("<span id='cTodo' class='counter'>"+wipQ.todo+"</span>").appendTo('#todo-li');
+         $("<span id='cProgress' class='counter'>"+wipQ.inprogress+"</span>").appendTo('#inprogress-li');
+         $("<span id='cReview' class='counter'>"+wipQ.review+"</span>").appendTo('#review-li');
+          });
         });
         $("<span id='cTodo' class='counter'>"+cTodo+"</span>").appendTo('#todo-li');
         $("<span id='cProgress' class='counter'>"+cProgress+"</span>").appendTo('#inprogress-li');
@@ -94,21 +94,21 @@ $(document).ready(function() {
         $("<h4>In Progress("+cProgress+")</h4>").appendTo("#tablet-inprogress");
         $("<h4>Review("+cReview+")</h4>").appendTo("#tablet-review");
 
-	debugMsg("end of json request processing");
+   debugMsg("end of json request processing");
     });
 
 
     // displaying Labels with different CSS
     function labelMagic(data) {
-	var temp = "";
-	if (data.labels === "um-priority") {
-	    temp = "label";
-	} else if (data.labels === " " || data.labels === "") {
-	    temp = "label-none";
-	} else {
-	    temp = "label label-info";
-	}
-	return temp;
+   var temp = "";
+   if (data.labels === "um-priority") {
+       temp = "label";
+   } else if (data.labels === " " || data.labels === "") {
+       temp = "label-none";
+   } else {
+       temp = "label label-info";
+   }
+   return temp;
     };
 
 
@@ -122,23 +122,23 @@ $(document).ready(function() {
     // Pass in jquery identifier and the text to search for.
     var setupSearchField = function(searchField,prefix) {
 
-	// store the identifer so it can be used when cleaning up
-	// search field display.
+   // store the identifer so it can be used when cleaning up
+   // search field display.
 
-	searchFields.push(searchField);
-	debugMsg("searchFields: ",searchFields);
+   searchFields.push(searchField);
+   debugMsg("searchFields: ",searchFields);
 
-	// create the keyup function to do the search.
+   // create the keyup function to do the search.
 
-	$(searchField).keyup(function(event){
+   $(searchField).keyup(function(event){
 
-	    resetSearchOther(searchField);
-	    searchForText(prefix+$(searchField).val());
+       resetSearchOther(searchField);
+       searchForText(prefix+$(searchField).val());
 
-	    if (event.keyCode == 27) {
-		resetSearch(searchField);
+       if (event.keyCode == 27) {
+      resetSearch(searchField);
             }
-	})
+   })
     };
 
     // Add the jquery id and text to search for.
@@ -157,40 +157,40 @@ $(document).ready(function() {
 
     // search items for specific text
     var searchForText = function(textToFind) {
-	debugMsg("sFT: "+textToFind);
+   debugMsg("sFT: "+textToFind);
         // reset all counts
-	var cTodo=0, cProgress=0, cReview=0;
+   var cTodo=0, cProgress=0, cReview=0;
 
         if (textToFind.length > 0) {
 
-	    // hide things but then show items with matching text.
+       // hide things but then show items with matching text.
             $('.list-group-item').hide();
             $('.list-group-item:Contains(\'' + textToFind + '\')').show();
-	    
-	    // calculate number of entries in each group.
+       
+       // calculate number of entries in each group.
             cTodo = $('.list-group-item:Contains(\'' + textToFind + '\'):Contains("todo-label")').length ;
-	    cProgress = $('.list-group-item:Contains(\'' + textToFind + '\'):Contains("inprogress-label")').length;
-	    cReview = $('.list-group-item:Contains(\'' + textToFind + '\'):Contains("review-label")').length;
-	    $('#cTodo').html(cTodo);
-	    $('#cProgress').html(cProgress);
-	    $('#cReview').html(cReview);
-	}
+       cProgress = $('.list-group-item:Contains(\'' + textToFind + '\'):Contains("inprogress-label")').length;
+       cReview = $('.list-group-item:Contains(\'' + textToFind + '\'):Contains("review-label")').length;
+       $('#cTodo').html(cTodo);
+       $('#cProgress').html(cProgress);
+       $('#cReview').html(cReview);
+   }
 
-	if (textToFind.length == 0) {
-	    resetSearch();
-	}
+   if (textToFind.length == 0) {
+       resetSearch();
+   }
     }
 
 
     //empowering Contains method with case-insensitivity 
     $.expr[':'].Contains = function(a, i, m){
-	return $(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
+   return $(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
     };
 
     // supply and format the basic data common to each item.
     function baseTaskFields (data, label, labelClass) {
-	var taskString =
-    	    "<li class='list-group-item'>" +
+   var taskString =
+          "<li class='list-group-item'>" +
             "<a target='_blank' href='"+data.url+"'>" + data.title + "</a><br/>" +
             "<span class='assignee-style'>Assignee: "+data.assignee+"</span><br/>" +
             "<span class='reporter-style'>Reporter: "+data.reporter+"</span><br/>" +
@@ -198,7 +198,7 @@ $(document).ready(function() {
             "<span id='" +label + "' class ='"+labelClass+"'>"+data.labels+"</span>" +
             "<span style='display:none'>ProjectKey: "+data.projectKey+"</span>" + 
             "<span style='display:none'>" + label+"</span></li>"
-	return taskString;
+   return taskString;
     }
 
 
