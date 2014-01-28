@@ -36,7 +36,7 @@ public class JiraSyncServlet extends HttpServlet {
       
       XmlMerge xmlMerge = new XmlMerge();
       
-      if (queryString.equals("OK")) {
+      if (queryString.startsWith("its")) {
          String mergeFiles="";
          try {
             String xmlPath = props.getString("xml.path");

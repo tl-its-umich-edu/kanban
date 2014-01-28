@@ -61,7 +61,8 @@ $(document).ready(function() {
     var cTodo=0, cProgress=0, cReview=0;
     var counterClass="counter";
 
-    $.getJSON('/kanban/jirarequest','OK', function(jiraData) {
+    $.getJSON('/kanban/jirarequest', 'its.tl.url', function(jiraData) {
+//    $.getJSON('/kanban/jirarequest', 'its.url', function(jiraData) {
    document.getElementById("wait-div").style.display = 'none';
         $.each(jiraData, function(i, data) {
             var labelClass=labelMagic(data);
@@ -81,6 +82,7 @@ $(document).ready(function() {
             }
 
         });
+    
         $.getJSON('/kanban/jirarequest','wip',function(wipResult){
           $.each(wipResult, function(i, wipQ) {
             $("<span id='cTodo' class='counterGreen'>"+cTodo+"</span>").appendTo('#todo-li');

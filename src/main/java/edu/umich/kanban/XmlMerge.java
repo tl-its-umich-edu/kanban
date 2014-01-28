@@ -30,6 +30,8 @@ import org.xml.sax.InputSource;
 
 public class XmlMerge {
 
+   ResourceBundle props = ResourceBundle.getBundle("jira");
+   
    /**
     ** Merge and transform the two JIRA XML file streams defined by the its.url and sakai.url properties
     ** @param queryString Servlet query string (currently not used)
@@ -39,9 +41,8 @@ public class XmlMerge {
     **/
    public String mergeFiles(String queryString, String xsltPath, String xmlPath) throws Exception {
       
-      ResourceBundle labels = ResourceBundle.getBundle("jira");
-      String its=basicAuthITS(labels);
-      String sakai = basicAuthSakai(labels);
+      String its=queryJiraITS(queryString);
+      String sakai = queryJiraSakai(queryString);
       
       //merging 2 Xml file from both ITS and Sakai Xml to single file using DOm parsing
       DocumentBuilderFactory domFactory = DocumentBuilderFactory
@@ -80,12 +81,14 @@ public class XmlMerge {
       return jsonOutput;
    }
    
-   //getting ITS data using basic Auth
-   private String basicAuthITS(ResourceBundle its) throws Exception {
+   /*
+   ** Query ITS JIRA 
+    */
+   private String queryJiraITS(String queryUrl) throws Exception {
       
-      String webPage =its.getString("its.url");
-      String name =its.getString("its.username");
-      String password = its.getString("its.password");
+      String webPage =props.getString(queryUrl);
+      String name =props.getString("its.username");
+      String password = props.getString("its.password");
       String authString=name+":"+password;
       byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
       String authStringEnc = new String(authEncBytes);
@@ -105,9 +108,9 @@ public class XmlMerge {
    }
    
    //getting the Sakai data 
-   private String basicAuthSakai(ResourceBundle sakai) throws Exception {
+   private String queryJiraSakai(String queryUrl) throws Exception {
       
-      String webPage = sakai.getString("sakai.url");
+      String webPage = props.getString("sakai.url");
       URL url = new URL(webPage);
       URLConnection urlConnection = url.openConnection();
       InputStream is = urlConnection.getInputStream();
