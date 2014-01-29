@@ -2,16 +2,15 @@
 its.username=
 its.password=
 
-# These are the two URLs for querying ITS and Sakai JIRA
-its.url=https://jira.it.umich.edu/sr/jira.issueviews:searchrequest-xml/10309/SearchRequest-10309.xml?tempMax=1000
-sakai.url=https://jira.sakaiproject.org/sr/jira.issueviews:searchrequest-xml/13625/SearchRequest-13625.xml?tempMax=1000
+# These are the three URLs for querying ITS and Sakai JIRA
+its.url=https://jira.it.umich.edu/sr/jira.issueviews:searchrequest-xml/10309/SearchRequest-10309.xml
+its.tl.url=https://jira.it.umich.edu/sr/jira.issueviews:searchrequest-xml/11302/SearchRequest-11302.xml
+sakai.url=https://jira.sakaiproject.org/sr/jira.issueviews:searchrequest-xml/13625/SearchRequest-13625.xml
 
 # These are relative file paths
 xml.path=xml/merged.xml
 xslt.path=xml/xml2json.xslt
 
 wip.todo=100
-wip.inprogress=20
-wip.review=30
-
-
+wip.inprogress=33
+wip.review=33
