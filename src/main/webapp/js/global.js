@@ -209,9 +209,9 @@ $(document).ready(function(){
             cTodo = $('.list-group-item:Contains(\'' + textToFind + '\'):Contains("todo-label")').length;
             cProgress = $('.list-group-item:Contains(\'' + textToFind + '\'):Contains("inprogress-label")').length;
             cReview = $('.list-group-item:Contains(\'' + textToFind + '\'):Contains("review-label")').length;
-            $('#cTodo').html(cTodo);
-            $('#cProgress').html(cProgress);
-            $('#cReview').html(cReview);
+            $('#cTodo1').text(cTodo);
+            $('#cProgress1').text(cProgress);
+            $('#cReview1').text(cReview);
         }
         
         if (textToFind.length === 0) {
