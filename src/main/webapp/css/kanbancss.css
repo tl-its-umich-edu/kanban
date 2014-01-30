@@ -1,11 +1,12 @@
 
 .special-heading{
     position:fixed;
-    height:100px;
+    background:#eee;
     top:0;
     left:0;
     right:0;
     z-index:1;
+    border-bottom:1px solid #ccc
 }
 
 li {
@@ -22,6 +23,7 @@ li {
 
 .body-div{
     float: left;
+    padding-top:155px;
     overflow: auto;
     clear: both;
 }
@@ -30,6 +32,9 @@ li {
     margin-left: auto;
     margin-right: auto;
     width: 25%;
+    position:absolute;
+    top:150px;
+    left:35%;
 }
 
 .list-group-item:hover{
@@ -90,39 +95,16 @@ li {
 }
 
 .searchBar3{
-    background:#d3d3d3;
-    border-style:solid;
-    border-width:0px;
-    border: black;
-    clear:right;
-    display:block;
-    float: left;
-    padding-bottom:10px;
-    padding-left:18px;
-    padding-top:100px;
-
+    clear:both;
+    height:auto;
+    line-height:30px;
 }
-
-.createTicket{
-    float: left;
-    display:block;
-    height:25px;
-    padding-bottom:40px;
-    padding-left:18px;
-    padding-top:10px;
-    clear:right;
+.searchBar3 input{
+    margin:0 10px
 }
-
-.filterIssues{
-    float: left;
-    display:block;
-    height:25px;
-    padding-bottom:40px;
-    padding-left:50px;
-    padding-top:10px;
-    clear:right;
+.filterBar {
+     height:100%;clear:both;margin:25px 0
 }
-
 .counter{
     margin:0 auto 0 auto;
     padding:3px;
@@ -152,4 +134,11 @@ li {
 
 .tablet-misc{
     padding-left:20px;
+}
+.form-group input{
+    margin:10px 3px;
+}
+.createInput, .filterInput {
+    padding:0 3px;
+    margin-top:10px
 }
