@@ -93,7 +93,7 @@
                         </div>
                     </div>
                 </nav>
-                <ul style="height:100%;overflow:hidden;margin:-15px 0 0 0;padding:0;">
+                <ul class="hidden-sm hidden-xs" style="height:100%;overflow:hidden;margin:-15px 0 0 0;padding:0;">
                     <li id="todo-li" class="header-todo-li" style="float:left;display:inline;width:34%;margin:0;padding:0;white-space:nowrap;">
                         <h4>To Do&nbsp;
                             <small>
@@ -104,7 +104,7 @@
                     <li id="inprogress-li" class="header-inprogress-li"  style="float:left;display:inline;width:31%;margin:0;padding:0;white-space:nowrap;">
                         <h4>In Progress&nbsp;
                             <small>
-                                <span class="label label-default" id="cProgress1"></span>&nbsp;<span class="label label-default" id="cProgress2"></span>
+                                <span class="label label-default" id="cProgress1"></span>&nbsp;<span class="label label-default" id="cProgress2"></span><span class="label label-default" id="cProgress3"></span>
                             </small>
                         </h4>
                     </li>
@@ -123,22 +123,22 @@
             <img src="images/thinking.png"/><img src="images/ajax_loader_blue_128.gif"/>
         </div><!-- Body Div-->
         <div id="body-div" class="body-div">
-            <ul id="body-ul" class="list-group">
-                <div id="tablet-todo" class="visible-xs hidden-lg tablet-misc">
-                </div>
-                <li id="body-li-todopanel" class="col-lg-4 ToDoPanel">
+            <ul id="body-ul" class="list-group row">
+                <li id="body-li-todopanel" class="col-md-4 ToDoPanel">
+                    <div id="tablet-todo" class="visible-xs hidden-lg hidden-md tablet-misc">
+                    </div>
                     <ul id="inner-body-ul-for-todopanel" class="list-group">
                     </ul>
                 </li>
-                <div id="tablet-inprogress" class="visible-xs hidden-lg tablet-misc">
-                </div>
-                <li id="body-li-inprogress" class="col-lg-4 InProgress">
+                <li id="body-li-inprogress" class="col-md-4 InProgress">
+                    <div id="tablet-inprogress" class="visible-xs hidden-lg hidden-md tablet-misc">
+                    </div>
                     <ul id="inner-body-ul-for-inprogress" class="list-group">
                     </ul>
                 </li>
-                <div id="tablet-review" class="visible-xs hidden-lg tablet-misc">
-                </div>
-                <li id="body-li-review" class="col-lg-4 Review">
+                <li id="body-li-review" class="col-md-4 Review">
+                    <div id="tablet-review" class="visible-xs hidden-lg hidden-md tablet-misc">
+                    </div>
                     <ul id="inner-body-ul-for-review" class="list-group">
                     </ul>
                 </li>

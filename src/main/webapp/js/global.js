@@ -49,7 +49,28 @@ var resetSearchAll = function(){
     resetSearchOther();
 };
 
+Object.keyAt = function(obj, index) {
+    var i = 0;
+    for (var key in obj) {
+        if ((index || 0) === i++) return key;
+    }
+};
+
+
 $(document).ready(function(){
+
+    var urlParams;
+    (window.onpopstate = function(){
+        var match, pl = /\+/g, // Regex for replacing addition symbol with a space
+        search = /([^&=]+)=?([^&]*)/g, decode = function(s){
+            return decodeURIComponent(s.replace(pl, " "));
+        }, query = window.location.search.substring(1);
+        
+        urlParams = {};
+        while (match = search.exec(query)) {
+            urlParams[decode(match[1])] = decode(match[2]);
+        }
+    })();
 
     resetSearchAll();
     
@@ -94,7 +115,7 @@ $(document).ready(function(){
             });
             $.getJSON('/kanban/jirarequest', 'wip', function(wipResult){
                 $.each(wipResult, function(i, wipQ){
-                    $('span#cTodo1').text(cTodo).addClass('label-success');
+                    $('span#cTodo1').text($('#inner-body-ul-for-todopanel li:visible').length).addClass('label-success');
                     // we may use wipQ.todo for a 4th column (backlog vs todo) but for now, it's unneeded
                     $('span#cTodo2').text('n/a');
                     
@@ -104,7 +125,7 @@ $(document).ready(function(){
                     else {
                         counterClass = "label-success";
                     }
-                    $('span#cProgress1').attr('class', 'label ' + counterClass).text(cProgress);
+                    $('span#cProgress1').attr('class', 'label ' + counterClass).text($('#inner-body-ul-for-inprogress li:visible').length);
                     $('span#cProgress2').attr('class', 'label label-default').text(wipQ.inprogress);
                     
                     if (cReview > wipQ.review) {
@@ -113,15 +134,22 @@ $(document).ready(function(){
                     else {
                         counterClass = "label-success";
                     }
-                    $('span#cReview1').attr('class', 'label ' + counterClass).text(cReview);
+                    $('span#cReview1').attr('class', 'label ' + counterClass).text($('#inner-body-ul-for-review li:visible').length);
                     $('span#cReview2').attr('class', 'label label-default').text(wipQ.review);
                 });
-            });
+                var tabletToDoCont = $( "#todo-li h4" ).clone();
+                $( "#tablet-todo" ).html(tabletToDoCont)
+                var inProgressCont = $( "#inprogress-li h4" ).clone();
+                $( "#tablet-inprogress" ).html(inProgressCont)
+                var reviewCont = $( "#review-li h4" ).clone();
+                $( "#tablet-review" ).html(reviewCont);
+            })
+            var searchKey = Object.keyAt(urlParams, 0);
+            var searchVal = urlParams[searchKey];
             
-            //            $("<h4>To Do(" + cTodo + ")</h4>").appendTo("#tablet-todo");
-            //            $("<h4>In Progress(" + cProgress + ")</h4>").appendTo("#tablet-inprogress");
-            //            $("<h4>Review(" + cReview + ")</h4>").appendTo("#tablet-review");
-            
+            $('#' + searchKey).val(searchVal).keyup();
+            console.log($('#inner-body-ul-for-todopanel li:visible').length)
+            $('span#cTodo1').text($('#inner-body-ul-for-todopanel li:visible').length)
             debugMsg("end of json request processing");
         });
     };
@@ -212,6 +240,12 @@ $(document).ready(function(){
             $('#cTodo1').text(cTodo);
             $('#cProgress1').text(cProgress);
             $('#cReview1').text(cReview);
+               var tabletToDoCont = $( "#todo-li h4" ).clone();
+                $( "#tablet-todo" ).html(tabletToDoCont)
+                var inProgressCont = $( "#inprogress-li h4" ).clone();
+                $( "#tablet-inprogress" ).html(inProgressCont)
+                var reviewCont = $( "#review-li h4" ).clone();
+                $( "#tablet-review" ).html(reviewCont);
         }
         
         if (textToFind.length === 0) {
@@ -288,7 +322,4 @@ $(document).ready(function(){
     $(document).ajaxStop(function(){
         $("#wait-div").hide();
     });
-    
-    
-    
 });
