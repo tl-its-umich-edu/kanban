@@ -148,7 +148,6 @@ $(document).ready(function(){
             var searchVal = urlParams[searchKey];
             
             $('#' + searchKey).val(searchVal).keyup();
-            console.log($('#inner-body-ul-for-todopanel li:visible').length)
             $('span#cTodo1').text($('#inner-body-ul-for-todopanel li:visible').length)
             debugMsg("end of json request processing");
         });
