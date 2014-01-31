@@ -241,8 +241,15 @@ $(document).ready(function(){
         "</span><br/>" +
         "<span class='priority-style'>Priority: " +
         data.priority +
-        "</span><br/>" +
-        "<span id='" +
+        "</span><br/>";
+        
+        if  (label == "review-label"){
+            taskString += "<span class='updated-style'>Last Updated: " +
+            data.updated +
+            "</span><br/>";
+        }
+            
+        taskString += "<span id='" +
         label +
         "' class ='" +
         labelClass +
@@ -255,6 +262,7 @@ $(document).ready(function(){
         "<span style='display:none'>" +
         label +
         "</span></li>";
+        
         return taskString;
     }
     

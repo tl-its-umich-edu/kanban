@@ -64,6 +64,11 @@
 <xsl:text>",</xsl:text>
 
 <xsl:text>
+"updated" : "</xsl:text>
+<xsl:value-of select="updated"/>
+<xsl:text>",</xsl:text>
+
+<xsl:text>
 "labels" : "</xsl:text>
 <xsl:for-each select="labels/label">
    <xsl:text></xsl:text>
