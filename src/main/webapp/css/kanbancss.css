@@ -146,3 +146,9 @@ li {
     padding:0 3px;
     margin-top:10px
 }
+#helpPanel {
+    position:fixed;
+    top:40px;
+    left:0;
+    z-index:1;
+}
