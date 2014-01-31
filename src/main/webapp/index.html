@@ -39,19 +39,19 @@
                                 <input id="txtSearch" name="txtSearch" maxlength="50" type="text" placeholder="Search on the page "/>
                             </div>
                             <div id="assigneeSearch" class="assigneeSearch  form-group">
-                                <label for="assigneeSearch" class="sr-only">
+                                <label for="assigneeSearchTxt" class="sr-only">
                                     Search by assignee 
                                 </label>
                                 <input id="assigneeSearchTxt" name="assigneeSearch" maxlength="50" type="text" placeholder="Search by assignee"/>
                             </div>
                             <div id="prioritySearch" class="prioritySearch  form-group">
-                                <label for="prioritySearch" class="sr-only">
+                                <label for="prioritySearchTxt" class="sr-only">
                                     Search by priority 
                                 </label>
                                 <input id="prioritySearchTxt" name="prioritySearch" maxlength="50" type="text" placeholder="Search by priority"/>
                             </div>
                             <div id="reporterSearch" class="reporterSearch  form-group">
-                                <label for="reporterSearch" class="sr-only">
+                                <label for="reporterSearchTxt" class="sr-only">
                                     Search by reporter 
                                 </label>
                                 <input id="reporterSearchTxt" name="reporterSearch" maxlength="50" type="text" placeholder="Search by reporter"/>
@@ -61,6 +61,9 @@
                                     Search by project key 
                                 </label>
                                 <input id="projectKeySearchTxt" name="projectKeySearch" maxlength="50" type="text" placeholder="Search by project key "/>
+                                <button type="button" class="btn btn-primary btn-xs" style="margin-top:-2px" id="helpPanelControl" title="Using URLs with query strings">
+                                    ?
+                                </button>
                             </div>
                         </div>
                         <div class="nav navbar-nav navbar-right createInput">
@@ -101,14 +104,14 @@
                             </small>
                         </h4>
                     </li>
-                    <li id="inprogress-li" class="header-inprogress-li"  style="float:left;display:inline;width:31%;margin:0;padding:0;white-space:nowrap;">
+                    <li id="inprogress-li" class="header-inprogress-li" style="float:left;display:inline;width:31%;margin:0;padding:0;white-space:nowrap;">
                         <h4>In Progress&nbsp;
                             <small>
-                                <span class="label label-default" id="cProgress1"></span>&nbsp;<span class="label label-default" id="cProgress2"></span><span class="label label-default" id="cProgress3"></span>
+                                <span class="label label-default" id="cProgress1"></span>&nbsp;<span class="label label-default" id="cProgress2"></span>
                             </small>
                         </h4>
                     </li>
-                    <li id="review-li" class="header-review-li"  style="float:left;display:inline;width:25%;margin:0;padding:0 0 0 43px;white-space:nowrap;">
+                    <li id="review-li" class="header-review-li" style="float:left;display:inline;width:25%;margin:0;padding:0 0 0 43px;white-space:nowrap;">
                         <h4>Review&nbsp;
                             <small>
                                 <span class="label label-default" id="cReview1"></span>&nbsp;<span class="label label-default" id="cReview2"></span>
@@ -150,4 +153,35 @@
     </div>
     <!-- main div-->
 </body>
+<div id="helpPanel" class="alert alert-info alert-dismissable" style="display:none">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+        &times;
+    </button>
+    <h5>Searching with queries</h5>
+    <p>
+        Append the following to a URL:
+    </p>
+    <p>
+        Search page:
+        ?txtSearch=xxxxxx
+    </p>
+    <p>
+        Search assignee:
+        ?assigneeSearchTxt=xxxxxx
+    </p>
+    <p>
+        Search priority:
+        ?prioritySearchTxt=xxxxxx
+    </p>
+    <p>
+        Search reporter:
+        ?reporterSearchTxt=xxxxxx
+    </p>
+    <p>
+        Search project key:
+        ?projectKeySearchTxt=xxxxxx
+    </p>
+    </dd>
+    </dl>
+</div>
 </html>

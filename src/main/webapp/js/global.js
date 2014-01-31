@@ -314,6 +314,13 @@ $(document).ready(function(){
         $('#filterIssues small').hide();
         $('#filterIssues #messageAllStaff').show();
     });
+    $('#helpPanelControl').click(function(){
+        var position = $(this).position();
+        $('#helpPanel').css({'top':position.top + 30,'left':position.left -30}).show();
+    })
+    $('.close').click(function(){
+        $('#helpPanel').hide()
+    })
     
     $(document).ajaxStart(function(){
         $("#wait-div").show();
