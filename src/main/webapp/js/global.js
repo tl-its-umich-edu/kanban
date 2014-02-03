@@ -143,6 +143,7 @@ $(document).ready(function(){
                 $( "#tablet-inprogress" ).html(inProgressCont)
                 var reviewCont = $( "#review-li h4" ).clone();
                 $( "#tablet-review" ).html(reviewCont);
+                $('#wait-div').hide();
             })
             var searchKey = Object.keyAt(urlParams, 0);
             var searchVal = urlParams[searchKey];
@@ -150,7 +151,9 @@ $(document).ready(function(){
             $('#' + searchKey).val(searchVal).keyup();
             $('span#cTodo1').text($('#inner-body-ul-for-todopanel li:visible').length)
             debugMsg("end of json request processing");
+
         });
+
     };
     
     //initial get - the default
