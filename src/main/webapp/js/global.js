@@ -147,11 +147,11 @@ $(document).ready(function(){
             })
             var searchKey = Object.keyAt(urlParams, 0);
             var searchVal = urlParams[searchKey];
-            
-            $('#' + searchKey).val(searchVal).keyup();
+            if (searchVal) {
+                $('#' + searchKey).val(searchVal).keyup();
+            }
             $('span#cTodo1').text($('#inner-body-ul-for-todopanel li:visible').length)
             debugMsg("end of json request processing");
-
         });
 
     };
