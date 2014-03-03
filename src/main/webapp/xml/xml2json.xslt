@@ -69,6 +69,11 @@
 <xsl:text>",</xsl:text>
 
 <xsl:text>
+"affectsVersion" : "</xsl:text>
+<xsl:value-of select="version"/>
+<xsl:text>",</xsl:text>
+
+<xsl:text>
 "labels" : "</xsl:text>
 <xsl:for-each select="labels/label">
    <xsl:text></xsl:text>

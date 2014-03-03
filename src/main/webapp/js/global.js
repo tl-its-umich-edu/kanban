@@ -284,6 +284,11 @@ $(document).ready(function(){
             data.updated +
             "</span><br/>";
         }
+        else if (data.affectsVersion){
+            taskString += "<span class='version-style'>Affects Version: " +
+            data.affectsVersion +
+            "</span><br/>";
+        }
             
         taskString += "<span id='" +
         label +
