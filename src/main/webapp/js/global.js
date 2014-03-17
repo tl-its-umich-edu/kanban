@@ -106,7 +106,7 @@ $(document).ready(function(){
                         $(inProgress).appendTo('#inner-body-ul-for-inprogress');
                     }
                     else 
-                        if ((data.status === "Resolved") || (data.status === "QA Testing")) {
+                        if ((data.status === "Resolved") || (data.status === "QA Testing") || (data.status == "In QA")) {
                             cReview++;
                             review = baseTaskFields(data, 'review-label', labelClass);
                             $(review).appendTo('#inner-body-ul-for-review');
