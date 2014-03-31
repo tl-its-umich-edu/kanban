@@ -284,8 +284,8 @@ $(document).ready(function(){
             data.updated +
             "</span><br/>";
         }
-        else if (data.affectsVersion){
-            taskString += "<span class='version-style'>Affects Version: " +
+        else if (data.fixVersion){
+            taskString += "<span class='version-style'>Fix Version: " +
             data.affectsVersion +
             "</span><br/>";
         }
