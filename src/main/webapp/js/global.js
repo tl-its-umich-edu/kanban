@@ -87,7 +87,7 @@ $(document).ready(function(){
         $('#inner-body-ul-for-review li').remove();
         
         
-        $.getJSON('/kanban/jirarequest', what, function(jiraData){
+        $.getJSON('/jirarequest', what, function(jiraData){
             cTodo = 0;
             cProgress = 0;
             cReview = 0;
@@ -113,7 +113,7 @@ $(document).ready(function(){
                         }
                 
             });
-            $.getJSON('/kanban/jirarequest', 'wip', function(wipResult){
+            $.getJSON('/jirarequest', 'wip', function(wipResult){
                 $.each(wipResult, function(i, wipQ){
                     $('span#cTodo1').text($('#inner-body-ul-for-todopanel li:visible').length).addClass('label-success');
                     // we may use wipQ.todo for a 4th column (backlog vs todo) but for now, it's unneeded
