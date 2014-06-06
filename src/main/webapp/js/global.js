@@ -281,7 +281,7 @@ $(document).ready(function(){
             
         taskString += "<br/><span class='assignee-style'>Assignee: " +
         data.assignee +
-        "</span>" +
+        "</span><br/>" +
         "<span class='reporter-style'>Reporter: " +
         data.reporter +
         "</span><br/>";
