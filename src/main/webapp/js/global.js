@@ -268,15 +268,22 @@ $(document).ready(function(){
         data.url +
         "'>" +
         data.title +
-        "</a><br/>" +
-        "<span class='assignee-style'>Assignee: " +
-        data.assignee +
-        "</span><br/>" +
-        "<span class='reporter-style'>Reporter: " +
-        data.reporter +
-        "</span><br/>" +
+        "</a><br/>" + 
         "<span class='priority-style'>Priority: " +
         data.priority +
+        "</span>";
+        
+        if (data.component){
+            taskString += "<span class='component-style'>Component: " +
+            data.component +
+            "</span>";
+        }
+            
+        taskString += "<br/><span class='assignee-style'>Assignee: " +
+        data.assignee +
+        "</span>" +
+        "<span class='reporter-style'>Reporter: " +
+        data.reporter +
         "</span><br/>";
         
         if  (label == "review-label"){
@@ -286,10 +293,10 @@ $(document).ready(function(){
         }
         else if (data.fixVersion){
             taskString += "<span class='version-style'>Fix Version: " +
-            data.affectsVersion +
+            data.fixVersion +
             "</span><br/>";
         }
-            
+        
         taskString += "<span id='" +
         label +
         "' class ='" +

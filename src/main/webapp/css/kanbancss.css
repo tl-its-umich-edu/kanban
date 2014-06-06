@@ -46,11 +46,18 @@ li {
 }
 
 .reporter-style{
-    color:#716B7A;
+#    color:#716B7A;
+    color:#333333;
+    float: right;
 }
 
 .priority-style{
     color:#716B00;
+}
+
+.component-style{
+    color:#716B00;
+    float: right;
 }
 
 .updated-style{
