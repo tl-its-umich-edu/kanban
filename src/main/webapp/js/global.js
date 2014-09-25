@@ -157,6 +157,7 @@ $(document).ready(function(){
     };
     
     //initial get - the default
+	// commented out for now
     getData('its.tl.url');
     $('#tlstaffbutton').attr('class', 'btn btn-default btn-xs');
     $('#filterIssues small').hide();
