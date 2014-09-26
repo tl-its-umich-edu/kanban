@@ -20,6 +20,7 @@
         <div id="main">
             <!-- another main DIV-->
             <div id="another-main">
+            	<span style="display:hidden" id="top"></span>
                 <!-- header div --><!-- group the search boxes --><!--<div id="searchBar3" class="searchBar3">-->
                 <nav class="navbar navbar-default" role="navigation">
                     <div class="container-fluid">
@@ -33,117 +34,148 @@
                             <a class="navbar-brand visible-xs hidden-sm hidden-md hidden-lg" href="#">Kanbanizer</a>
                         </div>
                         <div class="navbar-collapse collapse">
-                            <div class="visible-xs hidden-sm hidden-md hidden-lg">
-                                <div class="nav navbar-nav">
-                                    <div class="btn-group btn-group-sm">
-                                        <button type="button" class="btn btn-default" onclick="window.open('https://jira.it.umich.edu/secure/CreateIssue!default.jspa')">
-                                            New ITS
+                            <div class="btn-group btn-group-justified visible-xs hidden-sm hidden-md hidden-lg" style="margin-top:5px">
+                                <a class="btn btn-default" onclick="window.open('https://jira.it.umich.edu/secure/CreateIssue!default.jspa')">+ ITS</a>
+                                <a class="btn btn-default" onclick="window.open('https://jira.sakaiproject.org/secure/CreateIssue!default.jspa')">+ Sakai</a>
+                                <a class="btn btn-default tlstaffbutton" id="">T&L</a>
+                                <a class="btn btn-default allstaffbutton" id="">All</a>
+                            </div>
+                            <div class="container-fluid visible-xs hidden-sm hidden-md hidden-lg">
+                                <div class="nav navbar-nav row">
+                                    <div class="col-xs-2 col-md-2" style="padding-left:0;padding-right:0">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                            <span class="caret"></span>
                                         </button>
-                                        <button type="button" class="btn btn-default" onclick="window.open('https://jira.sakaiproject.org/secure/CreateIssue!default.jspa')">
-                                            New Sakai
-                                        </button>
-                                    </div>
-                                    <div class="btn-group btn-group-sm" id="filterIssues">
-                                        <button type="button" class="btn btn-primary" id="tlstaffbutton">
-                                            T&L Staff
-                                        </button>
-                                        <button type="button" class="btn btn-primary" id="allstaffbutton">
-                                            All Staff
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="nav navbar-nav navbar-left">
-                                    <div class="btn-group btn-group-sm">
-                                        <button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown">
-                                            Search <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu" role="menu">
+                                        <ul class="dropdown-menu" id="searchPicker" role="menu">
                                             <li>
-                                                <a href="#">on page</a>
+                                                <a href="#" class="txtSearch2">on page</a>
                                             </li>
                                             <li>
-                                                <a href="#">by assignee</a>
+                                                <a href="#" class="assigneeSearchTxt2">by assignee</a>
                                             </li>
                                             <li>
-                                                <a href="#">by priority</a>
+                                                <a href="#" class="prioritySearchTxt2">by priority</a>
                                             </li>
                                             <li>
-                                                <a href="#">by reporter</a>
+                                                <a href="#" class="reporterSearchTxt2">by reporter</a>
                                             </li>
                                             <li>
-                                                <a href="#">by key</a>
+                                                <a href="#" class="projectKeySearchTxt2">by key</a>
                                             </li>
                                             <li>
-                                                <a href="#">by label</a>
+                                                <a href="#" class="labelKeySearchTxt2">by label</a>
                                             </li>
                                         </ul>
                                     </div>
-                                </div>
-                                <div id="dummyHolder" class="navbar-form" style="display:none">
-                                    <input type="text" class="form-control"/>
-                                </div>
-                            </div>
-                            <div class="searchFieldWrapper hidden-xs visible-sm visible-md visible-lg">
-                                <div id="otherSiteSearch" class="otherSiteSearch form-group">
-                                    <label for="txtSearch" class="sr-only">
-                                        Search on the page
-                                    </label>
-                                    <input id="txtSearch" name="txtSearch" maxlength="50" type="text" placeholder="Search on the page "/>
-                                </div>
-                                <div id="assigneeSearch" class="assigneeSearch  form-group">
-                                    <label for="assigneeSearchTxt" class="sr-only">
-                                        Search by assignee
-                                    </label>
-                                    <input id="assigneeSearchTxt" name="assigneeSearch" maxlength="50" type="text" placeholder="Search by assignee"/>
-                                </div>
-                                <div id="prioritySearch" class="prioritySearch  form-group">
-                                    <label for="prioritySearchTxt" class="sr-only">
-                                        Search by priority
-                                    </label>
-                                    <input id="prioritySearchTxt" name="prioritySearch" maxlength="50" type="text" placeholder="Search by priority"/>
-                                </div>
-                                <div id="reporterSearch" class="reporterSearch  form-group">
-                                    <label for="reporterSearchTxt" class="sr-only">
-                                        Search by reporter
-                                    </label>
-                                    <input id="reporterSearchTxt" name="reporterSearch" maxlength="50" type="text" placeholder="Search by reporter"/>
-                                </div>
-                                <div id="projectKeySearch" class="projectKeySearch  form-group">
-                                    <label for="projectKeySearch" class="sr-only">
-                                        Search by project key
-                                    </label>
-                                    <input id="projectKeySearchTxt" name="projectKeySearch" maxlength="50" type="text" placeholder="Search by project key "/>
-                                    <button type="button" class="btn btn-primary btn-xs" style="margin-top:-2px" id="helpPanelControl" title="Using URLs with query strings">
-                                        ?
-                                    </button>
+                                    <div class="col-xs-10 col-md-10 mobileSearch" style="padding-left:0;padding-right:0">
+                                        <span class="txtSearch2" style="display:none">
+                                            <label for="txtSearch2" class="sr-only">
+                                                Search on the page
+                                            </label>
+                                            <input id="txtSearch2" name="txtSearch2" maxlength="50" type="text" placeholder="Search on the page " class="form-control"/></span><span class="assigneeSearchTxt2">
+                                            <label for="assigneeSearchTxt2" class="sr-only">
+                                                Search by assignee
+                                            </label>
+                                            <input id="assigneeSearchTxt2" name="assigneeSearch2" maxlength="50" type="text" placeholder="Search by assignee" class="form-control"/></span><span class="prioritySearchTxt2" style="display:none">
+                                            <label for="prioritySearchTxt2" class="sr-only">
+                                                Search by priority
+                                            </label>
+                                            <input id="prioritySearchTxt2" name="prioritySearch2" maxlength="50" type="text" placeholder="Search by priority" class="form-control"/></span><span class="reporterSearchTxt2" style="display:none">
+                                            <label for="reporterSearchTxt2" class="sr-only">
+                                                Search by reporter
+                                            </label>
+                                            <input id="reporterSearchTxt2" name="reporterSearch2" maxlength="50" type="text" placeholder="Search by reporter" class="form-control"/></span><span class="projectKeySearchTxt2" style="display:none">
+                                            <label for="projectKeySearchTxt2" class="sr-only">
+                                                Search by project key
+                                            </label>
+                                            <input id="projectKeySearchTxt2" name="projectKeySearch2" maxlength="50" type="text" placeholder="Search by project key " class="form-control" /></span><span class="labelKeySearchTxt2" style="display:none">
+                                            <label for="labelKeySearchTxt2" class="sr-only">
+                                                Search by project key
+                                            </label>
+                                            <input id="labelKeySearchTxt2" name="labelKeySearchTxt2" maxlength="50" type="text" placeholder="Search by label" class="form-control" /></span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="nav navbar-nav navbar-right createInput searchFieldWrapper hidden-xs visible-sm visible-md visible-lg">
-                                <div id="createTicket" class="form-group">
-                                    Create Issue
-                                    <button type="button" class="btn btn-primary btn-xs" onclick="window.open('https://jira.it.umich.edu/secure/CreateIssue!default.jspa')">
-                                        ITS Jira
-                                    </button>
-                                    <button type="button" class="btn btn-primary btn-xs" onclick="window.open('https://jira.sakaiproject.org/secure/CreateIssue!default.jspa')">
-                                        Sakai Jira
-                                    </button>
-                                </div>
+                            <div class="btn-group btn-group-justified visible-xs hidden-sm hidden-md hidden-lg" style="margin-top:5px">
+                                <a class="btn btn-default" href="#body-li-todopanel">To Do</a>
+								<a class="btn btn-default" href="#body-li-inprogress">In Progress</a>
+								<a class="btn btn-default" href="#body-li-review">Review</a>
                             </div>
-                            <div class="nav navbar-nav navbar-left filterInput searchFieldWrapper hidden-xs visible-sm visible-md visible-lg">
-                                <div id="filterIssues" class="form-group">
-                                    Filter Issues
-                                    <button type="button" class="btn btn-primary btn-xs" id="tlstaffbutton">
-                                        T&L Staff
-                                    </button>
-                                    <button type="button" class="btn btn-primary btn-xs" id="allstaffbutton">
-                                        All Staff
-                                    </button>
-                                    <small id="messageAllStaff" class="text-muted" style="display:none">
-                                        - showing <b>All Staff</b>
-                                    </small>
-                                    <small id="messageTlStaff" class="text-muted" style="display:none">
-                                        - showing <b>T&amp;L Staff</b>
-                                    </small>
+
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="searchFieldWrapper col-md-12 hidden-xs visible-sm visible-md visible-lg">
+                                        <div id="otherSiteSearch" class="otherSiteSearch form-group">
+                                            <label for="txtSearch" class="sr-only">
+                                                Search on the page
+                                            </label>
+                                            <input id="txtSearch" name="txtSearch" maxlength="50" type="text" placeholder="Search on the page "/>
+                                        </div>
+                                        <div id="assigneeSearch" class="assigneeSearch  form-group">
+                                            <label for="assigneeSearchTxt" class="sr-only">
+                                                Search by assignee
+                                            </label>
+                                            <input id="assigneeSearchTxt" name="assigneeSearch" maxlength="50" type="text" placeholder="Search by assignee"/>
+                                        </div>
+                                        <div id="prioritySearch" class="prioritySearch  form-group">
+                                            <label for="prioritySearchTxt" class="sr-only">
+                                                Search by priority
+                                            </label>
+                                            <input id="prioritySearchTxt" name="prioritySearch" maxlength="50" type="text" placeholder="Search by priority"/>
+                                        </div>
+                                        <div id="reporterSearch" class="reporterSearch  form-group">
+                                            <label for="reporterSearchTxt" class="sr-only">
+                                                Search by reporter
+                                            </label>
+                                            <input id="reporterSearchTxt" name="reporterSearch" maxlength="50" type="text" placeholder="Search by reporter"/>
+                                        </div>
+                                        <div id="projectKeySearch" class="projectKeySearch  form-group">
+                                            <label for="projectKeySearch" class="sr-only">
+                                                Search by project key
+                                            </label>
+                                            <input id="projectKeySearchTxt" name="projectKeySearch" maxlength="50" type="text" placeholder="Search by project key "/>
+                                        </div>
+                                        <div id="labelKeySearch" class="projectKeySearch  form-group">
+                                            <label for="labelKeySearch" class="sr-only">
+                                                Search by project key
+                                            </label>
+                                            <input id="labelKeySearchTxt" name="labelKeySearch" maxlength="50" type="text" placeholder="Search by label"/>
+                                            <button type="button" class="btn btn-primary btn-xs" style="margin-top:-2px" id="helpPanelControl" title="Using URLs with query strings">
+                                                ?
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+								<p></p>
+                                <div class="row">
+                                    <div class="col-md-12 hidden-xs visible-sm visible-md visible-lg">
+                                        <span id="createTicket" class="form-group">
+                                            Create Issue
+                                            <button type="button" class="btn btn-primary btn-xs" onclick="window.open('https://jira.it.umich.edu/secure/CreateIssue!default.jspa')">
+                                                ITS Jira
+                                            </button>
+                                            <button type="button" class="btn btn-primary btn-xs" onclick="window.open('https://jira.sakaiproject.org/secure/CreateIssue!default.jspa')">
+                                                Sakai Jira
+                                            </button>
+                                        </span>
+                                        <span id="filterIssues" class="form-group">
+                                            Filter Issues
+                                            <button type="button" class="btn btn-default btn-xs tlstaffbutton">
+                                                T&L Staff
+                                            </button>
+                                            <button type="button" class="btn btn-default btn-xs allstaffbutton">
+                                                All Staff
+                                            </button>
+                                            <small id="" class="messageAllStaff text-muted" style="display:none">
+                                                - showing <b>All Staff</b>
+                                            </small>
+                                            <small id="" class="messageTlStaff text-muted" style="display:none">
+                                                - showing <b>T&amp;L Staff</b>
+                                            </small>
+                                        </span>
+										<p></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -159,10 +191,11 @@
             <div id="body-div" class="body-div">
                 <ul id="body-ul" class="list-group row">
                     <li id="body-li-todopanel" class="col-md-4 ToDoPanel">
-                        <h4>To Do&nbsp;
+                        <h4>To Do&nbsp; 
                             <small>
                                 <span class="label label-default" id="cTodo1"></span>&nbsp;<span class="label label-default" id="cTodo2"></span>
                             </small>
+							<a class="pull-right visible-xs hidden-sm hidden-md hidden-lg" href="#top"><i class="glyphicon glyphicon-arrow-up"></i><span class="sr-only">To top</span></a>
                         </h4>
                         <ul id="inner-body-ul-for-todopanel" class="list-group">
                         </ul>
@@ -172,6 +205,7 @@
                             <small>
                                 <span class="label label-default" id="cProgress1"></span>&nbsp;<span class="label label-default" id="cProgress2"></span>
                             </small>
+							<a class="pull-right visible-xs hidden-sm hidden-md hidden-lg" href="#top"><i class="glyphicon glyphicon-arrow-up"></i><span class="sr-only">To top</span></a>
                         </h4>
                         <ul id="inner-body-ul-for-inprogress" class="list-group">
                         </ul>
@@ -181,6 +215,7 @@
                             <small>
                                 <span class="label label-default" id="cReview1"></span>&nbsp;<span class="label label-default" id="cReview2"></span>
                             </small>
+							<a class="pull-right visible-xs hidden-sm hidden-md hidden-lg" href="#top"><i class="glyphicon glyphicon-arrow-up"></i><span class="sr-only">To top</span></a>
                         </h4>
                         <ul id="inner-body-ul-for-review" class="list-group">
                         </ul>
@@ -217,6 +252,10 @@
             <p>
                 Search project key:
                 ?projectKeySearchTxt=xxxxxx
+            </p>
+            <p>
+                Search label:
+                ?labelKeySearchTxt=xxxxxx
             </p>
         </div>
     </body>
