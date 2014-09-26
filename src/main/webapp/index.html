@@ -105,7 +105,7 @@
 
                             <div class="container-fluid">
                                 <div class="row">
-                                    <div class="searchFieldWrapper col-md-12 hidden-xs visible-sm visible-md visible-lg">
+                                    <div class="searchFieldWrapperhidden-xs visible-sm visible-md visible-lg">
                                         <div id="otherSiteSearch" class="otherSiteSearch form-group">
                                             <label for="txtSearch" class="sr-only">
                                                 Search on the page
@@ -184,14 +184,10 @@
                     <!--/.container-fluid -->
                 </nav>
             </div>
-            <!-- please wait while page is loading div -->
-            <div id="wait-div">
-                <img src="images/thinking.png"/><img src="images/ajax_loader_blue_128.gif"/>
-            </div><!-- Body Div-->
             <div id="body-div" class="body-div">
                 <ul id="body-ul" class="list-group row">
                     <li id="body-li-todopanel" class="col-md-4 ToDoPanel">
-                        <h4>To Do&nbsp; 
+                        <h4 class="titleStatus">To Do&nbsp; 
                             <small>
                                 <span class="label label-default" id="cTodo1"></span>&nbsp;<span class="label label-default" id="cTodo2"></span>
                             </small>
@@ -201,7 +197,7 @@
                         </ul>
                     </li>
                     <li id="body-li-inprogress" class="col-md-4 InProgress">
-                        <h4>In Progress&nbsp;
+                        <h4 class="titleStatus">In Progress&nbsp;
                             <small>
                                 <span class="label label-default" id="cProgress1"></span>&nbsp;<span class="label label-default" id="cProgress2"></span>
                             </small>
@@ -211,7 +207,7 @@
                         </ul>
                     </li>
                     <li id="body-li-review" class="col-md-4 Review">
-                        <h4>Review&nbsp;
+                        <h4 class="titleStatus">Review&nbsp;
                             <small>
                                 <span class="label label-default" id="cReview1"></span>&nbsp;<span class="label label-default" id="cReview2"></span>
                             </small>
@@ -225,6 +221,11 @@
             <!-- Body Div-->
         </div>
         <!-- main div-->
+        <!-- please wait while page is loading div -->
+        <div id="wait-div">
+            <img src="images/thinking.png"/><img src="images/ajax_loader_blue_128.gif"/>
+        </div><!-- Body Div-->
+
         <div id="helpPanel" class="alert alert-info alert-dismissable" style="display:none">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
                 &times;

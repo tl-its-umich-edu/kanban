@@ -7,7 +7,6 @@ li {
 
 
 .ToDoPanel ul,.InProgress ul,.Review ul{
-    border: 1px solid #ccc;
     border-radius: 5px 5px 5px 5px;
 }
 
