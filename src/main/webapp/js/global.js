@@ -86,8 +86,10 @@ $(document).ready(function(){
         $('#inner-body-ul-for-inprogress li').remove();
         $('#inner-body-ul-for-review li').remove();
         
+		$('.titleStatus').hide();
         
         $.getJSON('/jirarequest', what, function(jiraData){
+			$('.titleStatus').show();
             cTodo = 0;
             cProgress = 0;
             cReview = 0;
@@ -114,6 +116,7 @@ $(document).ready(function(){
                 
             });
             $.getJSON('/jirarequest', 'wip', function(wipResult){
+				$('.titleStatus').show();
                 $.each(wipResult, function(i, wipQ){
                     $('span#cTodo1').text($('#inner-body-ul-for-todopanel li:visible').length).addClass('label-success');
                     // we may use wipQ.todo for a 4th column (backlog vs todo) but for now, it's unneeded
@@ -157,8 +160,10 @@ $(document).ready(function(){
     };
     
     //initial get - the default
+	// commented out for now
     getData('its.tl.url');
-    $('#tlstaffbutton').attr('class', 'btn btn-default btn-xs');
+	$('.tlstaffbutton').attr('disabled','disabled')
+    $('.allstaffbutton').removeAttr('disabled')
     $('#filterIssues small').hide();
     $('#filterIssues small#messageTlStaff').show();
     
@@ -194,7 +199,6 @@ $(document).ready(function(){
         // search field display.
         
         searchFields.push(searchField);
-        debugMsg("searchFields: ", searchFields);
         
         // create the keyup function to do the search.
         
@@ -222,9 +226,17 @@ $(document).ready(function(){
     setupSearchField('#prioritySearchTxt', 'Priority: ');
     setupSearchField('#reporterSearchTxt', 'Reporter: ');
     setupSearchField('#projectKeySearchTxt', 'ProjectKey: ');
+	setupSearchField('#txtSearch2', '');
+	setupSearchField('#labelKeySearchTxt', '');
+    setupSearchField('#assigneeSearchTxt2', 'Assignee: ');
+    setupSearchField('#prioritySearchTxt2', 'Priority: ');
+    setupSearchField('#reporterSearchTxt2', 'Reporter: ');
+    setupSearchField('#projectKeySearchTxt2', 'ProjectKey: ');
+	setupSearchField('#labelKeySearchTxt2', '');
     
     // search items for specific text
     var searchForText = function(textToFind){
+
         debugMsg("sFT: " + textToFind);
         // reset all counts
         var cTodo = 0, cProgress = 0, cReview = 0;
@@ -242,12 +254,6 @@ $(document).ready(function(){
             $('#cTodo1').text(cTodo);
             $('#cProgress1').text(cProgress);
             $('#cReview1').text(cReview);
-               var tabletToDoCont = $( "#todo-li h4" ).clone();
-                $( "#tablet-todo" ).html(tabletToDoCont)
-                var inProgressCont = $( "#inprogress-li h4" ).clone();
-                $( "#tablet-inprogress" ).html(inProgressCont)
-                var reviewCont = $( "#review-li h4" ).clone();
-                $( "#tablet-review" ).html(reviewCont);
         }
         
         if (textToFind.length === 0) {
@@ -297,12 +303,9 @@ $(document).ready(function(){
             "</span><br/>";
         }
         
-        taskString += "<span id='" +
-        label +
-        "' class ='" +
+        taskString += "<span class ='label-style " +
         labelClass +
-        "'>" +
-        data.labels +
+        "'>" + data.labels +
         "</span>" +
         "<span style='display:none'>ProjectKey: " +
         data.projectKey +
@@ -314,20 +317,20 @@ $(document).ready(function(){
         return taskString;
     }
     
-    $('#tlstaffbutton').click(function(){
+    $('.tlstaffbutton').click(function(){
         getData('its.tl.url');
-        $('#tlstaffbutton').attr('class', 'btn btn-default btn-xs');
-        $('#allstaffbutton').attr('class', 'btn btn-primary btn-xs');
-        $('#filterIssues small').hide();
-        $('#filterIssues #messageTlStaff').show();
+		$('.tlstaffbutton').attr('disabled','disabled')
+        $('.allstaffbutton').removeAttr('disabled')
+		$('#filterIssues small').hide();
+        $('#filterIssues .messageTlStaff').show();
     });
     
-    $('#allstaffbutton').click(function(){
+    $('.allstaffbutton').click(function(){
         getData('its.url');
-        $('#allstaffbutton').attr('class', 'btn btn-default  btn-xs');
-        $('#tlstaffbutton').attr('class', 'btn btn-primary  btn-xs');
+		$('.allstaffbutton').attr('disabled','disabled')
+        $('.tlstaffbutton').removeAttr('disabled')
         $('#filterIssues small').hide();
-        $('#filterIssues #messageAllStaff').show();
+        $('#filterIssues .messageAllStaff').show();
     });
     $('#helpPanelControl').click(function(){
         var position = $(this).position();
@@ -336,6 +339,11 @@ $(document).ready(function(){
     $('.close').click(function(){
         $('#helpPanel').hide()
     })
+	$('#searchPicker a').click(function(){
+		var inputShow = $(this).attr('class');
+		$('.mobileSearch span').hide();
+		$('.mobileSearch span.' + inputShow).fadeIn('slow');
+	})
     
     $(document).ajaxStart(function(){
         $("#wait-div").show();

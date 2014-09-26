@@ -1,14 +1,4 @@
 
-.special-heading{
-    position:fixed;
-    background:#eee;
-    top:0;
-    left:0;
-    right:0;
-    z-index:1;
-    border-bottom:1px solid #ccc
-}
-
 li {
     list-style: none;
     padding-right: 200px;
@@ -17,15 +7,11 @@ li {
 
 
 .ToDoPanel ul,.InProgress ul,.Review ul{
-    border: 1px solid #ccc;
     border-radius: 5px 5px 5px 5px;
 }
 
-.body-div{
-    float: left;
-    padding-top:155px;
-    overflow: auto;
-    clear: both;
+.body-div > *{
+	margin:0
 }
 
 #wait-div{
@@ -46,7 +32,9 @@ li {
 }
 
 .reporter-style{
-#    color:#716B7A;
+    /*
+color:#716B7A;
+*/
     color:#333333;
 }
 
