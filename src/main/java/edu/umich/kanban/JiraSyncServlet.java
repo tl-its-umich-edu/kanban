@@ -36,7 +36,8 @@ public class JiraSyncServlet extends HttpServlet {
       
       XmlMerge xmlMerge = new XmlMerge();
       
-      if (queryString.startsWith("its")) {
+      // If queryString starts with ".", then it's a mergeFiles suffix
+      if (queryString.startsWith(".")) {
          String mergeFiles="";
          try {
             String xmlPath = props.getString("xml.path");
@@ -49,7 +50,9 @@ public class JiraSyncServlet extends HttpServlet {
          }
          dataOutput(out, mergeFiles);
       }
-      if(queryString.equals("wip")) {
+      
+      // Otherwise if the queryString equals wip, it's a "WIP" request
+      else if(queryString.equals("wip")) {
          StringBuilder jsonWip=new StringBuilder("[ {");
          jsonWip.append("\"todo\" : \"")
             .append(props.getString("wip.todo"))

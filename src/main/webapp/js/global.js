@@ -159,9 +159,8 @@ $(document).ready(function(){
 
     };
     
-    //initial get - the default
-	// commented out for now
-    getData('its.tl.url');
+   //initial get - T&L data is the default
+   getData('.tl');
 	$('.tlstaffbutton').attr('disabled','disabled')
     $('.allstaffbutton').removeAttr('disabled')
     $('#filterIssues small').hide();
@@ -318,7 +317,7 @@ $(document).ready(function(){
     }
     
     $('.tlstaffbutton').click(function(){
-        getData('its.tl.url');
+      getData('.tl');
 		$('.tlstaffbutton').attr('disabled','disabled')
         $('.allstaffbutton').removeAttr('disabled')
 		$('#filterIssues small').hide();
@@ -326,7 +325,7 @@ $(document).ready(function(){
     });
     
     $('.allstaffbutton').click(function(){
-        getData('its.url');
+      getData('.all');
 		$('.allstaffbutton').attr('disabled','disabled')
         $('.tlstaffbutton').removeAttr('disabled')
         $('#filterIssues small').hide();

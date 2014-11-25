@@ -33,8 +33,9 @@ public class XmlMerge {
    ResourceBundle props = ResourceBundle.getBundle("jira");
    
    /**
-    ** Merge and transform the two JIRA XML file streams defined by the its.url and sakai.url properties
-    ** @param queryString Servlet query string (currently not used)
+    ** Merge and transform the three JIRA XML file streams defined by the its.url and sakai.url and i2.url properties
+    **
+    ** @param queryString Additional query string from servlet
     ** @param xsltPath Input filepath of XSLT to transform xml into JSON
     ** @param xmlPath Output filepath of merged XML
     ** @returns String XML file transformed into JSON
@@ -43,21 +44,32 @@ public class XmlMerge {
       
       String its=queryJiraITS(queryString);
       String sakai = queryJiraSakai(queryString);
+      String internet2 = queryJiraInternet2(queryString);
       
-      //merging 2 Xml file from both ITS and Sakai Xml to single file using DOm parsing
+      // Build 3 Documents based on 3 JIRA RSS feeds queried above
       DocumentBuilderFactory domFactory = DocumentBuilderFactory
          .newInstance();
       domFactory.setIgnoringComments(true);
       DocumentBuilder builder = domFactory.newDocumentBuilder();
       Document doc = builder.parse(new InputSource(new StringReader(sakai)));
       Document docIts = builder.parse(new InputSource(new StringReader(its)));
+      Document docInternet2 = builder.parse(new InputSource(new StringReader(internet2)));
       
+      // Merge ITS JIRA nodes into Sakai (master) Doc
       NodeList nodesSakai = doc.getElementsByTagName("item");
       NodeList nodesIts = docIts.getElementsByTagName("item");
       for (int i = 0; i < nodesIts.getLength(); i++) {
          Node n = (Node) doc.importNode(nodesIts.item(i), true);
          nodesSakai.item(0).getParentNode().appendChild(n);
       }
+      
+      // Merge Internet2 JIRA nodes into Sakai (master) Doc
+      NodeList nodesInternet2 = docInternet2.getElementsByTagName("item");
+      for (int i = 0; i < nodesInternet2.getLength(); i++) {
+         Node n = (Node) doc.importNode(nodesInternet2.item(i), true);
+         nodesSakai.item(0).getParentNode().appendChild(n);
+      }
+      
       Transformer transformer = TransformerFactory.newInstance()
          .newTransformer();
       transformer.setOutputProperty(OutputKeys.INDENT, "yes");
@@ -81,18 +93,20 @@ public class XmlMerge {
       return jsonOutput;
    }
    
-   /*
-   ** Query ITS JIRA 
-    */
-   private String queryJiraITS(String queryUrl) throws Exception {
+   /**
+    ** Query ITS JIRA instance
+    **
+    ** @param queryString Additional query string from servlet
+    **/
+   private String queryJiraITS(String queryUrlSuffix) throws Exception {
       
-      String webPage =props.getString(queryUrl);
+      String xmlFeed =props.getString("its.url"+queryUrlSuffix);
       String name =props.getString("its.username");
       String password = props.getString("its.password");
       String authString=name+":"+password;
       byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
       String authStringEnc = new String(authEncBytes);
-      URL url = new URL(webPage);
+      URL url = new URL(xmlFeed);
       URLConnection urlConnection = url.openConnection();
       urlConnection.setRequestProperty("Authorization", "Basic " + authStringEnc);
       InputStream is = urlConnection.getInputStream();
@@ -107,11 +121,38 @@ public class XmlMerge {
       return result;
    }
    
-   //getting the Sakai data 
-   private String queryJiraSakai(String queryUrl) throws Exception {
+   /**
+    ** Query Sakai JIRA instance
+    **
+    ** @param queryString Additional query string from servlet (unused)
+    **/
+   private String queryJiraSakai(String queryUrlSuffix) throws Exception {
       
-      String webPage = props.getString("sakai.url");
-      URL url = new URL(webPage);
+      String xmlFeed = props.getString("sakai.url"+queryUrlSuffix);
+      URL url = new URL(xmlFeed);
+      URLConnection urlConnection = url.openConnection();
+      InputStream is = urlConnection.getInputStream();
+      InputStreamReader isr = new InputStreamReader(is);
+      int numCharsRead;
+      char[] charArray = new char[1024];
+      StringBuffer sb = new StringBuffer();
+      while ((numCharsRead = isr.read(charArray)) > 0) {
+         sb.append(charArray, 0, numCharsRead);
+      }
+      String result = sb.toString();
+      return result;
+      
+   }
+   
+   /**
+    ** Query Internet2 JIRA instance
+    **
+    ** @param queryString Additional query string from servlet
+    **/
+   private String queryJiraInternet2(String queryUrlSuffix) throws Exception {
+      
+      String xmlFeed = props.getString("i2.url"+queryUrlSuffix);
+      URL url = new URL(xmlFeed);
       URLConnection urlConnection = url.openConnection();
       InputStream is = urlConnection.getInputStream();
       InputStreamReader isr = new InputStreamReader(is);

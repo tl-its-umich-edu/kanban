@@ -2,10 +2,13 @@
 its.username=
 its.password=
 
-# These are the three URLs for querying ITS and Sakai JIRA
-its.url=https://jira.it.umich.edu/sr/jira.issueviews:searchrequest-xml/10309/SearchRequest-10309.xml
-its.tl.url=https://jira.it.umich.edu/sr/jira.issueviews:searchrequest-xml/11302/SearchRequest-11302.xml
-sakai.url=https://jira.sakaiproject.org/sr/jira.issueviews:searchrequest-xml/13625/SearchRequest-13625.xml
+# These are the URLs for querying ITS, Sakai and Internet2 JIRA
+its.url.all=https://jira.it.umich.edu/sr/jira.issueviews:searchrequest-xml/10309/SearchRequest-10309.xml
+its.url.tl=https://jira.it.umich.edu/sr/jira.issueviews:searchrequest-xml/11302/SearchRequest-11302.xml
+sakai.url.all=https://jira.sakaiproject.org/sr/jira.issueviews:searchrequest-xml/13625/SearchRequest-13625.xml
+sakai.url.tl=https://jira.sakaiproject.org/sr/jira.issueviews:searchrequest-xml/13625/SearchRequest-13625.xml
+i2.url.all=https://bugs.internet2.edu/jira/sr/jira.issueviews:searchrequest-xml/11477/SearchRequest-11477.xml
+i2.url.tl=https://bugs.internet2.edu/jira/sr/jira.issueviews:searchrequest-xml/11480/SearchRequest-11480.xml
 
 # These are relative file paths
 xml.path=xml/merged.xml
