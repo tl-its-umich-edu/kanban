@@ -302,10 +302,14 @@ $(document).ready(function(){
             "</span><br/>";
         }
         
-        taskString += "<span class ='label-style " +
-        labelClass +
-        "'>" + data.labels +
-        "</span>" +
+        var labelString="";
+        $.each(data.labels, function(index, value ) {
+            labelString += "<span class ='label-style " +
+            labelClass +
+            "'>" + value +
+            "</span> "
+        });
+        taskString += labelString +
         "<span style='display:none'>ProjectKey: " +
         data.projectKey +
         "</span>" +
