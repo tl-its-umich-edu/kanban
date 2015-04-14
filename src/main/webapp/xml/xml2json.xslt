@@ -50,14 +50,16 @@
          <xsl:text>"component" : "</xsl:text>
          <xsl:value-of select="component" />
          <xsl:text>",</xsl:text>
-         <xsl:text>"labels" : "</xsl:text>
+         <xsl:text>"labels" : [</xsl:text>
          <xsl:for-each select="labels/label">
+            <xsl:text>"</xsl:text>
             <xsl:value-of select="." />
+            <xsl:text>"</xsl:text>
             <xsl:if test="position()!=last()">
-               <xsl:text> </xsl:text>
+               <xsl:text>,</xsl:text>
             </xsl:if>
          </xsl:for-each>
-         <xsl:text>"}</xsl:text>
+         <xsl:text>]}</xsl:text>
          <xsl:if test="position()!=last()">
           <xsl:text>,</xsl:text>
           </xsl:if>
