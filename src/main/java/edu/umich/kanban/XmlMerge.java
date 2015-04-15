@@ -8,10 +8,21 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ResourceBundle;
 
+import java.net.URL;
+import java.net.URLConnection;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+import java.security.cert.X509Certificate;
+import java.security.NoSuchAlgorithmException;
+import java.security.KeyManagementException;
+ 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
@@ -28,10 +39,60 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import java.util.logging.Logger;
+
 public class XmlMerge {
 
    ResourceBundle props = ResourceBundle.getBundle("jira");
+   private static Log M_log = LogFactory.getLog(XmlMerge.class);
    
+   /** Sakai JIRA is using RapidSSL which isn't currently trusted, so for now, we'll trust everyone
+    **/
+   static
+   {
+      // Create a trust manager that does not validate certificate chains
+      TrustManager[] trustAllCerts = new TrustManager[] 
+      {
+         new X509TrustManager() {
+            public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+               return null;
+            }
+            public void checkClientTrusted(X509Certificate[] certs, String authType) {
+            }
+            public void checkServerTrusted(X509Certificate[] certs, String authType) {
+            }
+         }
+      };
+      
+      // Install the all-trusting trust manager
+      try
+      {
+      SSLContext sc = SSLContext.getInstance("SSL");
+      sc.init(null, trustAllCerts, new java.security.SecureRandom());
+      HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+      }
+      catch ( NoSuchAlgorithmException nsa )
+      {
+         M_log.debug(nsa);
+      }
+      catch (KeyManagementException km )
+      {
+         M_log.debug(km);
+      }
+      
+      // Create all-trusting host name verifier
+      HostnameVerifier allHostsValid = new HostnameVerifier() {
+            public boolean verify(String hostname, SSLSession session) {
+               return true;
+            }
+         };
+      
+      // Install the all-trusting host verifier
+      HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
+   }
+      
    /**
     ** Merge and transform the three JIRA XML file streams defined by the its.url and sakai.url and i2.url properties
     **
@@ -120,7 +181,7 @@ public class XmlMerge {
       String result = sb.toString();
       return result;
    }
-   
+
    /**
     ** Query Sakai JIRA instance
     **
