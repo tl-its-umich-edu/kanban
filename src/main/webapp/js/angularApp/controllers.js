@@ -1,15 +1,16 @@
 'use strict';
-/* global angular, kanban */
+/* global kanban, _, $ */
 
 kanban.controller('kanbanController', ['Issues', '$rootScope', '$scope', '$timeout', function(Issues, $rootScope, $scope, $timeout) {
 
   //default request
-  //$timeout(function() {
-  //  angular.element('#tlstaffbutton').triggerHandler('click');
-  //}, 0);
+  $timeout(function() {
+    angular.element('#tlstaffbutton').triggerHandler('click');
+  }, 0);
 
   var issuesUrl = '/jirarequest?' + $rootScope.sourceCollection;
   $scope.loading = true;
+  
   var wipUrl='/jirarequest?wip';
   
   Issues.getWip(wipUrl).then(function(result) {
@@ -17,28 +18,12 @@ kanban.controller('kanbanController', ['Issues', '$rootScope', '$scope', '$timeo
       //source error: do something
     } else {
       if (result.errors) {
-        //angular error: do something
+        //angular error: do something else
       } else {
         $scope.wip = result.data;
       }
     }
-     $scope.loading = false;
   });
-
-
-  Issues.getIssues(issuesUrl).then(function(result) {
-    if (result.data.errors) {
-      //source error: do something
-    } else {
-      if (result.errors) {
-        //angular error: do something
-      } else {
-        $scope.issues = result.data;
-      }
-    }
-     $scope.loading = false;
-  });
-
 
 
   //subsequent requests via buttons
@@ -53,7 +38,18 @@ kanban.controller('kanbanController', ['Issues', '$rootScope', '$scope', '$timeo
           //angular error: do something
         } else {
           $scope.issues = result.data;
-          console.log($scope.issues)
+          $scope.projects = _.uniq(_.pluck(result.data, 'projectKey'));
+          $scope.priorities = _.uniq(_.pluck(result.data, 'priority'));
+          var labelsPrep = _.compact(_.pluck(result.data, 'labels'));
+          var labelsPrep2 = [];
+          $.each(labelsPrep, function() {
+              if(this.length) {
+                $.each(this, function() {
+                  labelsPrep2.push(this.label);
+                });
+              }
+          });
+          $scope.labels = _.sortBy(_.uniq(labelsPrep2), function (name) {return name});
         }
       }
        $scope.loading = false;

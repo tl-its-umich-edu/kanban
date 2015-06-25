@@ -22,7 +22,6 @@ kanban.factory('Issues', function ($http) {
           result.data[0].todo = parseInt(result.data[0].todo);
           result.data[0].inprogress = parseInt(result.data[0].inprogress);
           result.data[0].review = parseInt(result.data[0].review);
-          console.log(result.data)
           return result;
         },
         function error(result) {

@@ -6,7 +6,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Kanban Board 2</title>
         <meta name="author" content="Gundala, Pushyami" />
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/vendor/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/kanbancss.css" />
     </head>
     <body ng-app="kanban"  ng-controller="kanbanController">
@@ -79,7 +79,7 @@
                                             <label for="reporterSearchTxt2" class="sr-only">
                                                 Search by reporter
                                             </label>
-                                            <input id="reporterSearchTxt2" name="reporterSearch2" maxlength="50" type="text" placeholder="Search by reporter" class="form-control"/></span><span class="projectKeySearchTxt2" style="display:none">
+                                            <input id="reporterSearchTxt2" name="reporterSearch2" maxlength="50" type="text" placeholder="Search by reporter" class="form-control" ng-model="reporter"/></span><span class="projectKeySearchTxt2" style="display:none">
                                             <label for="projectKeySearchTxt2" class="sr-only">
                                                 Search by project key
                                             </label>
@@ -96,7 +96,6 @@
 								<a class="btn btn-default" href="#body-li-inprogress">In Progress</a>
 								<a class="btn btn-default" href="#body-li-review">Review</a>
                             </div>
-
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="searchFieldWrapperhidden-xs visible-sm visible-md visible-lg">
@@ -110,31 +109,31 @@
                                             <label for="assigneeSearchTxt" class="sr-only">
                                                 Search by assignee
                                             </label>
-                                            <input id="assigneeSearchTxt" name="assigneeSearch" maxlength="50" type="text" placeholder="Search by assignee"/>
+                                            <input id="assigneeSearchTxt" name="assigneeSearch" maxlength="50" type="text" placeholder="Search by assignee" ng-model="assigneeModel"/>
                                         </div>
                                         <div id="prioritySearch" class="prioritySearch  form-group">
                                             <label for="prioritySearchTxt" class="sr-only">
                                                 Search by priority
                                             </label>
-                                            <input id="prioritySearchTxt" name="prioritySearch" maxlength="50" type="text" placeholder="Search by priority"/>
+                                            <input id="prioritySearchTxt" name="prioritySearch" maxlength="50" type="text" placeholder="Search by priority" ng-model="priorityModel"/>
                                         </div>
                                         <div id="reporterSearch" class="reporterSearch  form-group">
                                             <label for="reporterSearchTxt" class="sr-only">
                                                 Search by reporter
                                             </label>
-                                            <input id="reporterSearchTxt" name="reporterSearch" maxlength="50" type="text" placeholder="Search by reporter"/>
+                                            <input id="reporterSearchTxt" name="reporterSearch" maxlength="50" type="text" placeholder="Search by reporter"  ng-model="reporterModel"/>
                                         </div>
                                         <div id="projectKeySearch" class="projectKeySearch  form-group">
                                             <label for="projectKeySearch" class="sr-only">
                                                 Search by project key
                                             </label>
-                                            <input id="projectKeySearchTxt" name="projectKeySearch" maxlength="50" type="text" placeholder="Search by project key "/>
+                                            <input id="projectKeySearchTxt" name="projectKeySearch" maxlength="50" type="text" placeholder="Search by project key " ng-model="projectKeyModel"/>
                                         </div>
                                         <div id="labelKeySearch" class="projectKeySearch  form-group">
                                             <label for="labelKeySearch" class="sr-only">
                                                 Search by project key
                                             </label>
-                                            <input id="labelKeySearchTxt" name="labelKeySearch" maxlength="50" type="text" placeholder="Search by label"/>
+                                            <input id="labelKeySearchTxt" name="labelKeySearch" maxlength="50" type="text" placeholder="Search by label" ng-model="labelModel" />
                                             <button type="button" class="btn btn-primary btn-xs" style="margin-top:-2px" id="helpPanelControl" title="Using URLs with query strings">
                                                 ?
                                             </button>
@@ -155,13 +154,13 @@
                                         </span>
                                         <span id="filterIssues" class="form-group">
                                             Filter Issues
-                                            <button type="button" class="btn btn-default btn-xs tlstaffbutton" id="tlstaffbutton">
+                                            <button type="button" class="btn btn-default btn-xs tlstaffbutton" id="tlstaffbutton" ng-click="switchIssueCollection('.tl')">
                                                 T&L Staff
                                             </button>
                                             <button type="button" class="btn btn-default btn-xs allstaffbutton" ng-click="switchIssueCollection('.all')">
                                                 All Staff
                                             </button>
-                                            <small id="" class="messageAllStaff text-muted" style="display:none" ng-click="switchIssueCollection('.tl')">
+                                            <small id="" class="messageAllStaff text-muted" style="display:none" >
                                                 - showing <b>All Staff</b>
                                             </small>
                                             <small id="" class="messageTlStaff text-muted" style="display:none">
@@ -178,10 +177,10 @@
                     <!--/.container-fluid -->
                 </nav>
             </div>
-            <div id="body-div" class="body-div">
+            <div id="body-div" class="body-div" ngcloak>
                 <ul id="body-ul" class="list-group row">
                     <li id="body-li-todopanel" class="col-md-4 ToDoPanel">
-                        <h4 class="titleStatus">To Do&nbsp; 
+                        <h4 class="titleStatus">To Do&nbsp;{{labelModel}}
                             <small>
                                 <span ng-class="filteredToDos.length > wip[0].todo ? 'label label-danger' : 'label label-success'"id="cProgress2" >{{filteredToDos.length}}</span>&nbsp;
                                 <span class="label label-default" id="cTodo1">{{wip[0].todo}}</span>
@@ -189,10 +188,10 @@
 							<a class="pull-right visible-xs hidden-sm hidden-md hidden-lg" href="#top"><i class="glyphicon glyphicon-arrow-up"></i><span class="sr-only">To top</span></a>
                         </h4>
                         <ul id="inner-body-ul-for-todopanel" class="list-group">
-                            <li class="list-group-item" ng-repeat="issue in filteredToDos = (issues | filter:showTodos)">
+                            <li class="list-group-item" ng-repeat="issue in filteredToDos = (issues | filter:showTodos ) | filter: { assignee:assigneeModel, reporter:reporterModel, priority:priorityModel, projectKey:projectKeyModel} | filter: {labels:{label:labelModel}}">
                                 <a target="_blank" href="{{issue.url}}"> {{issue.title}}</a><br/>
-                                <span class="priority-style">Priority: {{issue.priority}}</span>
-                                <span class="component-style" ng-if="issue.component">Component: {{issue.component}}</span>
+                                <span class="priority-style">Priority: {{issue.priority}}</span><br>
+                                <span class="" ng-if="issue.component">Component: {{issue.component}}</span>
                                 <br/><span class="assignee-style">Assignee: {{issue.assignee}}</span><br/>
                                 <span class="reporter-style">Reporter: {{issue.reporter}}</span><br/>
                                 <div  ng-repeat="label in issue.labels" style="display:inline-block"><span class="label-style label label-info">{{label.label}}</span>&nbsp;</div>
@@ -207,13 +206,13 @@
 							<a class="pull-right visible-xs hidden-sm hidden-md hidden-lg" href="#top"><i class="glyphicon glyphicon-arrow-up"></i><span class="sr-only">To top</span></a>
                         </h4>
                         <ul id="inner-body-ul-for-inprogress" class="list-group">
-                            <li class="list-group-item"  ng-repeat="issue in filteredInProgress = (issues | filter:showInProgress)">
+                            <li class="list-group-item"  ng-repeat="issue in filteredInProgress = (issues | filter:showInProgress) | filter: { assignee:assigneeModel, reporter:reporterModel, priority:priorityModel, projectKey:projectKeyModel } | filter: {labels:{label:labelModel}}">
                                 <a target="_blank" href="{{issue.url}}"> {{issue.title}}</a><br/>
-                                <span class="priority-style">Priority: {{issue.priority}}</span>
-                                <span class="component-style" ng-if="issue.component">Component: {{issue.component}}</span>
-                                <br/><span class="assignee-style">Assignee: {{issue.assignee}}</span><br/>
+                                <span class="priority-style">Priority: {{issue.priority}}</span><br/>
+                                <span class="component-style" ng-if="issue.component">Component: {{issue.component}}<br/></span>
+                                <span class="assignee-style">Assignee: {{issue.assignee}}</span><br/>
                                 <span class="reporter-style">Reporter: {{issue.reporter}}</span><br/>
-                                <span class="version-style" ng-if="issue.fixVersion">Fix Version: {{issue.fixVersion}}<br/></span>
+                                <span class="version-style" ng-if="issue.fixVersion">Fix Version: {{issue.fixVersion}}</span><br/>
                                 <div  ng-repeat="label in issue.labels" style="display:inline-block"><span class="label-style label label-info">{{label.label}}</span>&nbsp;</div>
                             </li>
                         </ul>
@@ -226,7 +225,7 @@
 							<a class="pull-right visible-xs hidden-sm hidden-md hidden-lg" href="#top"><i class="glyphicon glyphicon-arrow-up"></i><span class="sr-only">To top</span></a>
                         </h4>
                         <ul id="inner-body-ul-for-review" class="list-group">
-                            <li class="list-group-item"  ng-repeat="issue in filteredInReview = (issues | filter:showInReview)">
+                            <li class="list-group-item"  ng-repeat="issue in filteredInReview = (issues | filter:showInReview) | filter: { assignee:assigneeModel, reporter:reporterModel, priority:priorityModel, projectKey:projectKeyModel} | filter: {labels:{label:labelModel}}">
                                 <a target="_blank" href="{{issue.url}}"> {{issue.title}}</a><br/>
                                 <span class="priority-style">Priority: {{issue.priority}}</span>
                                 <span class="component-style" ng-if="issue.component">Component: {{issue.component}}</span>
@@ -282,21 +281,23 @@
                 ?labelKeySearchTxt=xxxxxx
             </p>
         </div>
-        <script type="text/javascript" src="js/jquery-2.1.1.min.js">
+        <script type="text/javascript" src="js/vendor/jquery-2.1.1.min.js">
         </script>
-        <script type="text/javascript" src="js/bootstrap.js">
+        <script type="text/javascript" src="js/vendor/bootstrap.js">
         </script>
-        <script type="text/javascript" src="js/angular/vendor/angular.min.js">
+        <script type="text/javascript" src="js/vendor/angular.min.js">
         </script>
-        <script src="js/angular/app.js" type="text/javascript">
+        <script type="text/javascript" src="js/vendor/underscore-min.js">
         </script>
-        <script src="js/angular/controllers.js" type="text/javascript">
+        <script src="js/angularApp/app.js" type="text/javascript">
         </script>
-        <script src="js/angular/factories.js" type="text/javascript">
+        <script src="js/angularApp/controllers.js" type="text/javascript">
         </script>
-        <script src="js/angular/filters.js" type="text/javascript">
+        <script src="js/angularApp/factories.js" type="text/javascript">
         </script>
-        <script src="js/angular/utils.js" type="text/javascript">
+        <script src="js/angularApp/filters.js" type="text/javascript">
+        </script>
+        <script src="js/angularApp/utils.js" type="text/javascript">
         </script>
         </div>
     </body>
