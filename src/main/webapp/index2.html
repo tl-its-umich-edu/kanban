@@ -103,12 +103,6 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="searchFieldWrapperhidden-xs visible-sm visible-md visible-lg">
-                                        <div id="otherSiteSearch" class="otherSiteSearch form-group">
-                                            <label for="txtSearch" class="sr-only">
-                                                Search on the page
-                                            </label>
-                                            <input id="txtSearch" name="txtSearch" maxlength="50" type="text" placeholder="Search on the page "/>
-                                        </div>
                                         <div id="assigneeSearch" class="assigneeSearch  form-group">
                                             <label for="assigneeSearchTxt" class="sr-only">
                                                 Search by assignee
@@ -138,7 +132,7 @@
                                                 Search by project key
                                             </label>
                                             <input id="labelKeySearchTxt" name="labelKeySearch" maxlength="50" type="text" placeholder="Search by label" ng-model="labelModel" />
-                                            <button type="button" class="btn btn-primary btn-xs" style="margin-top:-2px" id="helpPanelControl" title="Using URLs with query strings">
+                                            <button type="button" class="btn btn-primary btn-xs" style="margin-top:-2px"  title="Using URLs with query strings" ng-click="isHelpPanelOpen = !isHelpPanelOpen">
                                                 ?
                                             </button>
                                         </div>
@@ -158,16 +152,17 @@
                                         </span>
                                         <span id="filterIssues" class="form-group">
                                             Filter Issues
-                                            <button type="button" class="btn btn-default btn-xs tlstaffbutton" id="tlstaffbutton" ng-click="switchIssueCollection('.tl')">
+                                            <button type="button" ng-class="sourceCollection ==='.tl' ? 'btn btn-xs btn-default' : 'btn btn-xs  btn-primary'" id="tlstaffbutton" ng-click="switchIssueCollection('.tl')">
                                                 T&L Staff
                                             </button>
-                                            <button type="button" class="btn btn-default btn-xs allstaffbutton" ng-click="switchIssueCollection('.all')">
+                                            <button type="button" ng-class="sourceCollection==='.all' ? 'btn btn-xs btn-default' : 'btn btn-xs  btn-primary'"   ng-click="switchIssueCollection('.all')">
                                                 All Staff
                                             </button>
-                                            <small id="" class="messageAllStaff text-muted" style="display:none" >
+                                            
+                                            <small id="" class="messageAllStaff text-muted" ng-show="sourceCollection==='.all'">
                                                 - showing <b>All Staff</b>
                                             </small>
-                                            <small id="" class="messageTlStaff text-muted" style="display:none">
+                                            <small id="" class="messageTlStaff text-muted" ng-show="sourceCollection==='.tl'">
                                                 - showing <b>T&amp;L Staff</b>
                                             </small>
                                         </span>
@@ -252,17 +247,13 @@
             <img src="images/ajax_loader_blue_128.gif"/>
         </div><!-- Body Div-->
 
-        <div id="helpPanel" class="alert alert-info alert-dismissable" style="display:none">
+        <div id="helpPanel" class="alert alert-info alert-dismissable" ng-show="isHelpPanelOpen">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
                 &times;
             </button>
             <h5>Searching with queries</h5>
             <p>
                 Append the following to a URL:
-            </p>
-            <p>
-                Search page:
-                ?txtSearch=xxxxxx
             </p>
             <p>
                 Search assignee:

@@ -30,6 +30,7 @@ kanban.controller('kanbanController', ['Issues', '$rootScope', '$scope', '$timeo
   $scope.switchIssueCollection = function(collectionParam) {
     $scope.loading = true;
     var issuesUrl = '/jirarequest?' + collectionParam;
+    $rootScope.sourceCollection = collectionParam;
     Issues.getIssues(issuesUrl).then(function(result) {
       if (result.data.errors) {
         //source error: do something
