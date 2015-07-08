@@ -1,15 +1,18 @@
-/* jshint  strict: true*/
-/* global moment, angular */
+'use strict';
+/* global angular */
 
 /**
  * Collection of filters used to massage $scope elements
  * for display
+ *
+ * Just a shell for now.
+ * 
  */
 
-angular.module('kanbanFilters', []).filter('assignee', function () {
+angular.module('kanbanFilters', []).filter('blablabla', function () {
   return function (items) {
     return items.filter(function (item) {
-      return (/a/i.test(item.assignee(0, 1)));
+  		// whatever needs to be returned
     });
   };
 });

@@ -1,5 +1,5 @@
 'use strict';
-/* global $,  angular */
+/* global angular */
 
 var kanban = angular.module('kanban', ['kanbanFilters']);
 
