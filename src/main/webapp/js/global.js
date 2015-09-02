@@ -102,7 +102,7 @@ $(document).ready(function(){
                     $(itemsTodo).appendTo('#inner-body-ul-for-todopanel');
                 }
                 else 
-                    if ((data.status === "In Progress") || (data.status === "Development in Progress")) {
+                    if ((data.status === "In Progress") || (data.status === "Development in Progress") || (data.status === "Deploy")) {
                         cProgress++;
                         inProgress = baseTaskFields(data, 'inprogress-label', labelClass);
                         $(inProgress).appendTo('#inner-body-ul-for-inprogress');
