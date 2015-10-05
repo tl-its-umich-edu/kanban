@@ -1,7 +1,7 @@
 'use strict';
 /* global kanban, _, $, angular */
 
-kanban.controller('kanbanController', ['Issues', '$rootScope', '$scope', '$timeout', function(Issues, $rootScope, $scope, $timeout) {
+kanban.controller('kanbanController', ['Issues', '$rootScope', '$scope', '$timeout', '$parse', function(Issues, $rootScope, $scope, $timeout, $parse) {
 
   //default request - sending a click to the TL Staff button
   $timeout(function() {
@@ -87,6 +87,24 @@ kanban.controller('kanbanController', ['Issues', '$rootScope', '$scope', '$timeo
   $scope.showInReview = function(item) {
     return item.status === 'Resolved' || item.status === 'QA Testing' || item.status == 'In QA';
   };
+
+  var params = location.search.replace('?','').split('&');
+  if(params[0] !=='') {
+    $.each(params, function( index, value ) {
+      var param = value.split('=');
+      var key = param[0] + 'Model';
+      var val = param[1];
+      var model = $parse(key);
+      model.assign($scope, val);
+    });
+  }
+  /*
+  var param = location.search.replace('?','').split('=');
+  var key = param[0];
+  var val = param[1];
+  var model = $parse(key);
+  model.assign($scope, val);
+  */
 }]);
 
 

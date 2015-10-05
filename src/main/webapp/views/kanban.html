@@ -214,3 +214,28 @@
 <div id="wait-div" ng-show="loading">
   <img src="images/ajax_loader_blue_128.gif" />
 </div>
+        <div id="helpPanel" class="alert alert-info alert-dismissable" ng-show="isHelpPanelOpen">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                &times;
+            </button>
+            <h5>Searching with queries</h5>
+            <p>
+                Append the following to a URL:
+            </p>
+            <p>
+                ?searchWhat=thingToSearchFor
+                ie. search for assignee:
+                <code>?assignee=ckre</code>
+            </p>
+            <p> 
+              You can use <code>assignee, priority, reporter, project, label</code>
+            </p>
+            <p>
+              You can add multiples by separating each pair with "&"
+              ie. <code>?assignee=gsilver&priority=major&label=code-review</code>
+            </p>
+            <p>
+              The first pair always has "?" at the beginning
+            </p>
+
+        </div>
