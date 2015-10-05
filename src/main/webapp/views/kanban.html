@@ -123,6 +123,10 @@
                   <button type="button" class="btn btn-primary btn-xs" style="margin-top:-2px" title="Using URLs with query strings" ng-click="isHelpPanelOpen = !isHelpPanelOpen">
                     ?
                   </button>
+                  <button type="button" class="btn btn-primary btn-xs" style="margin-top:-2px" title="Build your URL" ng-click="buildUrl = !buildUrl">
+                    <span class="sr-only">Build a URL</span>
+                    <span class="glyphicon glyphicon-flash" aria-hidden="true"></span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -214,28 +218,32 @@
 <div id="wait-div" ng-show="loading">
   <img src="images/ajax_loader_blue_128.gif" />
 </div>
-        <div id="helpPanel" class="alert alert-info alert-dismissable" ng-show="isHelpPanelOpen">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-                &times;
-            </button>
-            <h5>Searching with queries</h5>
-            <p>
-                Append the following to a URL:
-            </p>
-            <p>
-                ?searchWhat=thingToSearchFor
-                ie. search for assignee:
-                <code>?assignee=ckre</code>
-            </p>
-            <p> 
-              You can use <code>assignee, priority, reporter, project, label</code>
-            </p>
-            <p>
-              You can add multiples by separating each pair with "&"
-              ie. <code>?assignee=gsilver&priority=major&label=code-review</code>
-            </p>
-            <p>
-              The first pair always has "?" at the beginning
-            </p>
+<div id="helpPanel" class="alert alert-info alert-dismissable" ng-show="isHelpPanelOpen">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+        &times;
+    </button>
+    <h5>Searching with queries</h5>
+    <p>
+        Append the following to a URL:
+    </p>
+    <p>
+        ?searchWhat=thingToSearchFor
+        ie. search for assignee:
+        <code>?assignee=ckre</code>
+    </p>
+    <p> 
+      You can use <code>assignee, priority, reporter, project, label</code>
+    </p>
+    <p>
+      You can add multiples by separating each pair with "&"
+      ie. <code>?assignee=gsilver&priority=major&label=code-review</code>
+    </p>
+    <p>
+      The first pair always has "?" at the beginning
+    </p>
 
-        </div>
+</div>
+<div id="buildUrl" class="alert alert-info alert-dismissable" ng-show="buildUrl">
+  <p>Build your query in the fields above. Then select the URL here.<br></p>
+  <p><input type="text" size="100" value="?assignee={{assigneeModel}}&priority={{priorityModel}}&reporter={{reporterModel}}&project={{projectKeyModel}}&label={{labelModel}}"></p>
+</div>
