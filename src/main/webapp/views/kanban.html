@@ -113,7 +113,7 @@
                   <label for="projectKeySearch" class="sr-only">
                     Search by project key
                   </label>
-                  <input id="projectKeySearchTxt" name="projectKeySearch" maxlength="50" type="text" placeholder="Search by project key " ng-model="projectKeyModel" />
+                  <input id="projectKeySearchTxt" name="projectKeySearch" maxlength="50" type="text" placeholder="Search by project key " ng-model="projectModel" />
                 </div>
                 <div id="labelKeySearch" class="projectKeySearch  form-group">
                   <label for="labelKeySearch" class="sr-only">
@@ -173,13 +173,13 @@
       <li id="body-li-todopanel" class="col-md-4 ToDoPanel">
         <h4 class="titleStatus">To Do&nbsp;
             <small>
-                <span ng-class="filteredToDos.length > wip[0].todo ? 'label label-danger' : 'label label-success'"id="cProgress2" >{{filteredToDos.length}}</span>&nbsp;
-                <span class="label label-default" id="cTodo1">{{wip[0].todo}}</span>
+                <span class="label label-success" id="cProgress2" >{{filteredToDos.length}}</span>&nbsp;
+                <span class="label label-default" id="cTodo1">NA</span>
             </small>
             <a class="pull-right visible-xs hidden-sm hidden-md hidden-lg" href="#top"><i class="glyphicon glyphicon-arrow-up"></i><span class="sr-only">To top</span></a>
         </h4>
         <ul id="inner-body-ul-for-todopanel" class="list-group">
-          <li class="list-group-item" ng-repeat="issue in filteredToDos = (issues | filter:showTodos ) | filter: { assignee:assigneeModel, reporter:reporterModel, priority:priorityModel, projectKey:projectKeyModel, labelsFlat:labelModel}">
+          <li class="list-group-item" ng-repeat="issue in filteredToDos = (issues | filter:showTodos ) | filter: { assignee:assigneeModel, reporter:reporterModel, priority:priorityModel, projectKey:projectModel, labelsFlat:labelModel}">
             <div ng-jira-to-do></div>
           </li>
         </ul>
@@ -192,7 +192,7 @@
             <a class="pull-right visible-xs hidden-sm hidden-md hidden-lg" href="#top"><i class="glyphicon glyphicon-arrow-up"></i><span class="sr-only">To top</span></a>
         </h4>
         <ul id="inner-body-ul-for-inprogress" class="list-group">
-          <li class="list-group-item" ng-repeat="issue in filteredInProgress = (issues | filter:showInProgress) | filter: { assignee:assigneeModel, reporter:reporterModel, priority:priorityModel, projectKey:projectKeyModel, labelsFlat:labelModel}">
+          <li class="list-group-item" ng-repeat="issue in filteredInProgress = (issues | filter:showInProgress) | filter: { assignee:assigneeModel, reporter:reporterModel, priority:priorityModel, projectKey:projectModel, labelsFlat:labelModel}">
             <div ng-jira-in-progress></div>
           </li>
         </ul>
@@ -205,7 +205,7 @@
             <a class="pull-right visible-xs hidden-sm hidden-md hidden-lg" href="#top"><i class="glyphicon glyphicon-arrow-up"></i><span class="sr-only">To top</span></a>
         </h4>
         <ul id="inner-body-ul-for-review" class="list-group">
-          <li class="list-group-item" ng-repeat="issue in filteredInReview = (issues | filter:showInReview)  | filter: { assignee:assigneeModel, reporter:reporterModel, priority:priorityModel, projectKey:projectKeyModel, labelsFlat:labelModel}">
+          <li class="list-group-item" ng-repeat="issue in filteredInReview = (issues | filter:showInReview)  | filter: { assignee:assigneeModel, reporter:reporterModel, priority:priorityModel, projectKey:projectModel, labelsFlat:labelModel}">
             <div ng-jira-review></div>
           </li>
         </ul>
@@ -244,6 +244,6 @@
 
 </div>
 <div id="buildUrl" class="alert alert-info alert-dismissable" ng-show="buildUrl">
-  <p>Build your query in the fields above. Then select the URL here.<br></p>
-  <p><input type="text" size="100" value="?assignee={{assigneeModel}}&priority={{priorityModel}}&reporter={{reporterModel}}&project={{projectKeyModel}}&label={{labelModel}}"></p>
+  <p>Build your query in the fields above. Then select the parameters here.<br></p>
+  <p><input type="text" size="100" value="?assignee={{assigneeModel}}&priority={{priorityModel}}&reporter={{reporterModel}}&project={{projectModel}}&label={{labelModel}}"></p>
 </div>
