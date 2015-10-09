@@ -82,7 +82,7 @@ kanban.controller('kanbanController', ['Issues', '$rootScope', '$scope', '$timeo
     return item.status === 'Awaiting Review' || item.status === 'Open' || item.status === 'Reopened';
   };
   $scope.showInProgress = function(item) {
-    return item.status === 'In Progress' || item.status === 'Development in Progress';
+    return item.status === 'In Progress' || item.status === 'Deploy' || item.status === 'Development in Progress';
   };
   $scope.showInReview = function(item) {
     return item.status === 'Resolved' || item.status === 'QA Testing' || item.status == 'In QA';
@@ -98,13 +98,6 @@ kanban.controller('kanbanController', ['Issues', '$rootScope', '$scope', '$timeo
       model.assign($scope, val);
     });
   }
-  /*
-  var param = location.search.replace('?','').split('=');
-  var key = param[0];
-  var val = param[1];
-  var model = $parse(key);
-  model.assign($scope, val);
-  */
 }]);
 
 
