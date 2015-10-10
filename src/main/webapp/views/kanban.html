@@ -144,10 +144,10 @@
                 </span>
                 <span id="filterIssues" class="form-group">
                     Filter Issues
-                    <button type="button" ng-class="sourceCollection ==='.tl' ? 'btn btn-xs btn-default' : 'btn btn-xs  btn-primary'" id="tlstaffbutton" ng-click="switchIssueCollection('.tl')">
+                    <button type="button" ng-disabled ="sourceCollection ==='.tl'" id="tlstaffbutton" ng-click="switchIssueCollection('.tl')">
                         T&L Staff
                     </button>
-                    <button type="button" ng-class="sourceCollection==='.all' ? 'btn btn-xs btn-default' : 'btn btn-xs  btn-primary'"   ng-click="switchIssueCollection('.all')">
+                    <button type="button" ng-disabled ="sourceCollection ==='.all'" class="btn btn-xs btn-default"   ng-click="switchIssueCollection('.all')">
                         All Staff
                     </button>
                     

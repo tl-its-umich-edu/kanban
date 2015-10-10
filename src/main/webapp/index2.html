@@ -16,7 +16,9 @@
             <p>So as a result we are unable to <strong>{{errors.message}}</strong></p>
             <p>Sorry.</p>
         </div>
-
+        <div style="position:absolute;right:10px;top:11px;z-index:100" class="hidden-xs hidden-sm">     
+            <input type="text" id="searchInPage" value="" placeholder="Search in page">
+        </div>
         <div ng-view></div>
 
         <script type="text/javascript" src="js/vendor/jquery-2.1.1.min.js">
