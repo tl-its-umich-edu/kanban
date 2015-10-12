@@ -7,11 +7,6 @@ var errorDisplay = function(url, status, message) {
 };
 
 $(document).ready(function(){
-    console.log ($("div").attr('class'));
-});
-
-
-$(document).ready(function(){
     $("#searchInPage").keyup(function(){
         var filter = $(this).val();
         $("li.list-group-item").each(function(){

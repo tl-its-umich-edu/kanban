@@ -44,7 +44,6 @@ public class XmlMerge {
       
       String its=queryJiraITS(queryString);
       String sakai = queryJiraSakai(queryString);
-      //String internet2 = queryJiraInternet2(queryString);
       
       // Build 3 Documents based on 3 JIRA RSS feeds queried above
       DocumentBuilderFactory domFactory = DocumentBuilderFactory
@@ -53,7 +52,6 @@ public class XmlMerge {
       DocumentBuilder builder = domFactory.newDocumentBuilder();
       Document doc = builder.parse(new InputSource(new StringReader(sakai)));
       Document docIts = builder.parse(new InputSource(new StringReader(its)));
-      //Document docInternet2 = builder.parse(new InputSource(new StringReader(internet2)));
       
       // Merge ITS JIRA nodes into Sakai (master) Doc
       NodeList nodesSakai = doc.getElementsByTagName("item");
@@ -62,14 +60,7 @@ public class XmlMerge {
          Node n = (Node) doc.importNode(nodesIts.item(i), true);
          nodesSakai.item(0).getParentNode().appendChild(n);
       }
-      
-      // Merge Internet2 JIRA nodes into Sakai (master) Doc
-      //NodeList nodesInternet2 = docInternet2.getElementsByTagName("item");
-      //for (int i = 0; i < nodesInternet2.getLength(); i++) {
-      //   Node n = (Node) doc.importNode(nodesInternet2.item(i), true);
-      //   nodesSakai.item(0).getParentNode().appendChild(n);
-      //}
-      
+            
       Transformer transformer = TransformerFactory.newInstance()
          .newTransformer();
       transformer.setOutputProperty(OutputKeys.INDENT, "yes");
@@ -129,29 +120,6 @@ public class XmlMerge {
    private String queryJiraSakai(String queryUrlSuffix) throws Exception {
       
       String xmlFeed = props.getString("sakai.url"+queryUrlSuffix);
-      URL url = new URL(xmlFeed);
-      URLConnection urlConnection = url.openConnection();
-      InputStream is = urlConnection.getInputStream();
-      InputStreamReader isr = new InputStreamReader(is);
-      int numCharsRead;
-      char[] charArray = new char[1024];
-      StringBuffer sb = new StringBuffer();
-      while ((numCharsRead = isr.read(charArray)) > 0) {
-         sb.append(charArray, 0, numCharsRead);
-      }
-      String result = sb.toString();
-      return result;
-      
-   }
-   
-   /**
-    ** Query Internet2 JIRA instance
-    **
-    ** @param queryString Additional query string from servlet
-    **/
-   private String queryJiraInternet2(String queryUrlSuffix) throws Exception {
-      
-      String xmlFeed = props.getString("i2.url"+queryUrlSuffix);
       URL url = new URL(xmlFeed);
       URLConnection urlConnection = url.openConnection();
       InputStream is = urlConnection.getInputStream();
