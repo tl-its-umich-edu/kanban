@@ -150,3 +150,10 @@ color:#716B7A;
     right:0;
     z-index:1;
 }
+.alertTop {
+    position:absolute;
+    top:150px;
+    z-index:2;
+    left:25%;
+    right:25%;
+}

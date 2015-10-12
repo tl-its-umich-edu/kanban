@@ -54,7 +54,6 @@
          <xsl:for-each select="labels/label">
             <xsl:value-of select="." />
          </xsl:for-each>
-         <xsl:value-of select="labels/label" />
          <xsl:text>",</xsl:text>
          <xsl:text>"labels" : [</xsl:text>
          <xsl:for-each select="labels/label">

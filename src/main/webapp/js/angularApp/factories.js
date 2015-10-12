@@ -11,7 +11,12 @@ kanban.factory('Issues', function ($http) {
           return result;
         },
         function error(result) {
-          errorDisplay(url, result.status, 'Unable to get issues');
+          var errors ={};
+          errors.errors = true;
+          errors.url = url;
+          errors.status = result.status;
+          errors.message = 'get issues';
+          return (errors);
         }
       );
     },
@@ -26,7 +31,14 @@ kanban.factory('Issues', function ($http) {
           return result;
         },
         function error(result) {
-          errorDisplay(url, result.status, 'Unable to get issues');
+          //errorDisplay(url, result.status, 'get WIP');
+          
+          var errors ={};
+          errors.errors = true;
+          errors.url = url;
+          errors.status = result.status;
+          errors.message = 'get WIP';
+          return (errors);
         }
       );
     }

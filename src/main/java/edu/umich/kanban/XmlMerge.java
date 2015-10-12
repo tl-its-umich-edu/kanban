@@ -44,7 +44,7 @@ public class XmlMerge {
       
       String its=queryJiraITS(queryString);
       String sakai = queryJiraSakai(queryString);
-      String internet2 = queryJiraInternet2(queryString);
+      //String internet2 = queryJiraInternet2(queryString);
       
       // Build 3 Documents based on 3 JIRA RSS feeds queried above
       DocumentBuilderFactory domFactory = DocumentBuilderFactory
@@ -53,7 +53,7 @@ public class XmlMerge {
       DocumentBuilder builder = domFactory.newDocumentBuilder();
       Document doc = builder.parse(new InputSource(new StringReader(sakai)));
       Document docIts = builder.parse(new InputSource(new StringReader(its)));
-      Document docInternet2 = builder.parse(new InputSource(new StringReader(internet2)));
+      //Document docInternet2 = builder.parse(new InputSource(new StringReader(internet2)));
       
       // Merge ITS JIRA nodes into Sakai (master) Doc
       NodeList nodesSakai = doc.getElementsByTagName("item");
@@ -64,11 +64,11 @@ public class XmlMerge {
       }
       
       // Merge Internet2 JIRA nodes into Sakai (master) Doc
-      NodeList nodesInternet2 = docInternet2.getElementsByTagName("item");
-      for (int i = 0; i < nodesInternet2.getLength(); i++) {
-         Node n = (Node) doc.importNode(nodesInternet2.item(i), true);
-         nodesSakai.item(0).getParentNode().appendChild(n);
-      }
+      //NodeList nodesInternet2 = docInternet2.getElementsByTagName("item");
+      //for (int i = 0; i < nodesInternet2.getLength(); i++) {
+      //   Node n = (Node) doc.importNode(nodesInternet2.item(i), true);
+      //   nodesSakai.item(0).getParentNode().appendChild(n);
+      //}
       
       Transformer transformer = TransformerFactory.newInstance()
          .newTransformer();
