@@ -71,5 +71,4 @@ kanban.controller('kanbanController', ['Issues', '$rootScope', '$scope', '$timeo
   };
 
 
-
 }]);
