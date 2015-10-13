@@ -173,7 +173,7 @@
       <li id="body-li-todopanel" class="col-md-4 ToDoPanel">
         <h4 class="titleStatus">To Do&nbsp;
             <small>
-                <span class="label label-success" id="cProgress2" >{{filteredToDos.length}}</span>&nbsp;
+                <span class="label label-success" id="cProgress2" >{{(issues | filter:showTodos | filter: { assignee:assigneeModel, reporter:reporterModel, priority:priorityModel, projectKey:projectModel, labelsFlat:labelModel}).length}}</span>&nbsp;
                 <span class="label label-default" id="cTodo1">NA</span>
             </small>
             <a class="pull-right visible-xs hidden-sm hidden-md hidden-lg" href="#top"><i class="glyphicon glyphicon-arrow-up"></i><span class="sr-only">To top</span></a>
@@ -187,7 +187,7 @@
       <li id="body-li-inprogress" class="col-md-4 InProgress">
         <h4 class="titleStatus">In Progress&nbsp;
             <small>
-                <span ng-class="filteredInProgress.length > wip[0].inprogress ? 'label label-danger' : 'label label-success'"id="cProgress2" >{{filteredInProgress.length}}</span>&nbsp;<span class="label label-default" id="cProgress1">{{wip[0].inprogress}}</span>
+                <span ng-class="filteredInProgress.length > wip[0].inprogress ? 'label label-danger' : 'label label-success'"id="cProgress2" >{{(issues | filter:showInProgress | filter: { assignee:assigneeModel, reporter:reporterModel, priority:priorityModel, projectKey:projectModel, labelsFlat:labelModel}).length}}</span>&nbsp;<span class="label label-default" id="cProgress1">{{wip[0].inprogress}}</span>
             </small>
             <a class="pull-right visible-xs hidden-sm hidden-md hidden-lg" href="#top"><i class="glyphicon glyphicon-arrow-up"></i><span class="sr-only">To top</span></a>
         </h4>
@@ -200,7 +200,7 @@
       <li id="body-li-review" class="col-md-4 Review">
         <h4 class="titleStatus">Review&nbsp;
             <small>
-                <span class="label label-default"  ng-class="filteredInReview.length > wip[0].review  ? 'label label-danger' : 'label label-success'">{{filteredInReview.length}}</span>&nbsp;<span class="label label-default">{{wip[0].review}}</span>
+                <span class="label label-default"  ng-class="filteredInReview.length > wip[0].review  ? 'label label-danger' : 'label label-success'">{{(issues | filter:showInReview | filter: { assignee:assigneeModel, reporter:reporterModel, priority:priorityModel, projectKey:projectModel, labelsFlat:labelModel}).length}}</span>&nbsp;<span class="label label-default">{{wip[0].review}}</span>
             </small>
             <a class="pull-right visible-xs hidden-sm hidden-md hidden-lg" href="#top"><i class="glyphicon glyphicon-arrow-up"></i><span class="sr-only">To top</span></a>
         </h4>
