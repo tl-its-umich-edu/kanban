@@ -109,6 +109,12 @@ kanban.controller('kanbanController', ['Issues', '$rootScope', '$scope', '$timeo
     window.location = window.location.origin + filter;
   }
 
+  $scope.removeFilter = function ( idx ) {
+    var filterToDelete = $scope.savedFilters[idx];
+    $scope.savedFilters.splice(idx, 1);
+    localStorage.setItem('kanbanFilters', $scope.savedFilters.join(','));
+  };
+
   $scope.saveQuery = function(){
     var current = [];
     if(localStorage.getItem('kanbanFilters')) {
