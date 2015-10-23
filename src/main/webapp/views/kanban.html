@@ -252,7 +252,7 @@
     </div>
      <button class="btn btn-default" href="#" id="saveQuery" ng-click="saveQuery()">Save</button>
   </form>
-  <div class="well" ng-if="savedFilters">
+  <div class="well" ng-show="savedFilters.length">
     <p><strong>Saved filters</strong></p>
     <ul class="list-group">
       <li class="list-group-item row" ng-repeat="filter in savedFilters">
