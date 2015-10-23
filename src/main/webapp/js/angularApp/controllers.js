@@ -3,6 +3,12 @@
 
 kanban.controller('kanbanController', ['Issues', '$rootScope', '$scope', '$timeout', '$parse', function(Issues, $rootScope, $scope, $timeout, $parse) {
 
+    if(localStorage.getItem('kanbanFilters')) {
+      $scope.savedFilters = localStorage.getItem('kanbanFilters').split(',');
+    }
+
+
+
   //default request - sending a click to the TL Staff button
   $timeout(function() {
     angular.element('#tlstaffbutton').triggerHandler('click');
@@ -97,6 +103,30 @@ kanban.controller('kanbanController', ['Issues', '$rootScope', '$scope', '$timeo
       var model = $parse(key);
       model.assign($scope, val);
     });
+  }
+
+  $scope.useFilter = function(filter){
+    window.location = window.location.origin + filter;
+  }
+
+  $scope.saveQuery = function(){
+    var current = [];
+    if(localStorage.getItem('kanbanFilters')) {
+      current = localStorage.getItem('kanbanFilters').split(',');
+    }
+
+    var ass = $scope.assigneeModel?$scope.assigneeModel:'';
+    var pri = $scope.priorityModel?$scope.priorityModel:'';
+    var rep = $scope.reporterModel?$scope.reporterModel:'';
+    var pro = $scope.projectModel?$scope.projectModel:'';
+    var lab = $scope.labelModel?$scope.labelModel:'';
+
+    var combo = '?assignee=' + ass + '&priority=' + pri + '&reporter=' + rep + '&project=' + pro + '&label=' + lab;
+    if(_.indexOf(current, combo) ==-1){
+      current.push(combo);
+    }
+    localStorage.setItem('kanbanFilters', current.join(','));
+    $scope.savedFilters = localStorage.getItem('kanbanFilters').split(',');
   }
 }]);
 

@@ -244,6 +244,18 @@
 
 </div>
 <div id="buildUrl" class="alert alert-info alert-dismissable" ng-show="buildUrl">
-  <p>Build your query in the fields above. Then select the parameters here.<br></p>
-  <p><input type="text" size="100" value="?assignee={{assigneeModel}}&priority={{priorityModel}}&reporter={{reporterModel}}&project={{projectModel}}&label={{labelModel}}"></p>
+  <p>Build your query in the fields above.<br></p>
+  <form class="form-inline">
+    <div class="form-group">
+      <label class="sr-only" for="queryBuilder">Query builder</label>
+      <input if="queryBuilder" class="form-control" type="text" size="70" value="?assignee={{assigneeModel}}&priority={{priorityModel}}&reporter={{reporterModel}}&project={{projectModel}}&label={{labelModel}}">
+    </div>
+     <button class="btn btn-default" href="#" id="saveQuery" ng-click="saveQuery()">Save</button>
+  </form>
+  <div class="well" ng-if="savedFilters">
+    <p><strong>Saved filters</strong></p>
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="filter in savedFilters"><a href="" ng-click="useFilter(filter)">{{filter}}</a></li>
+    </ul>
+  </div>
 </div>
