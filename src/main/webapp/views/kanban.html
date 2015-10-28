@@ -173,8 +173,7 @@
       <li id="body-li-todopanel" class="col-md-4 ToDoPanel">
         <h4 class="titleStatus">To Do&nbsp;
             <small ng-if="issues">
-                <span class="label label-success" id="todo" >{{(issues | filter:showTodos | filter: { assignee:assigneeModel, reporter:reporterModel, priority:priorityModel, projectKey:projectModel, labelsFlat:labelModel}).length}}</span>&nbsp;
-                <span class="label label-default" id="cTodo1">NA</span>
+                <span class="label label-success" id="todo">{{(issues | filter:showToDos | filter: { assignee:assigneeModel, reporter:reporterModel, priority:priorityModel, projectKey:projectModel, labelsFlat:labelModel}).length}}<span ng-show="(issues | filter:showToDos | filter: { assignee:assigneeModel, reporter:reporterModel, priority:priorityModel, projectKey:projectModel, labelsFlat:labelModel}).length  < (issues | filter:showInToDos).length">/{{(issues | filter:showToDos).length}}</span></span> &nbsp;<span class="label label-default" id="cTodo1">NA</span>
             </small>
             <a class="pull-right visible-xs hidden-sm hidden-md hidden-lg" href="#top"><i class="glyphicon glyphicon-arrow-up"></i><span class="sr-only">To top</span></a>
         </h4>
@@ -218,8 +217,8 @@
 <div id="wait-div" ng-show="loading">
   <img src="images/ajax_loader_blue_128.gif" />
 </div>
-<div id="helpPanel" class="alert alert-info alert-dismissable" ng-show="isHelpPanelOpen">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+<div id="helpPanel" class="alert alert-info" ng-show="isHelpPanelOpen">
+    <button type="button" ng-click="isHelpPanelOpen = !isHelpPanelOpen" class="close"aria-hidden="true">
         &times;
     </button>
     <h5>Searching with queries</h5>
@@ -244,7 +243,9 @@
 
 </div>
 <div id="buildUrl" class="alert alert-info alert-dismissable" ng-show="buildUrl">
-  <p>Build your query in the fields above. Save queries and launch.<br></p>
+  <button type="button" ng-click="buildUrl = !buildUrl" class="close" aria-label="Close" ng-click=""><span aria-hidden="true">&times;</span></button>
+  <p class="pull-left">Build your query in the fields above. Save queries and launch.</p>
+    <div class="clearfix"></div>
   <form class="form-inline">
     <div class="form-group">
       <label class="sr-only" for="queryBuilder">Query builder</label>
