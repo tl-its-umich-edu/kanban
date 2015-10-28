@@ -33,7 +33,7 @@ public class XmlMerge {
    ResourceBundle props = ResourceBundle.getBundle("jira");
    
    /**
-    ** Merge and transform the three JIRA XML file streams defined by the its.url and sakai.url and i2.url properties
+    ** Merge and transform the two JIRA XML file streams defined by the its.url and sakai.url
     **
     ** @param queryString Additional query string from servlet
     ** @param xsltPath Input filepath of XSLT to transform xml into JSON
