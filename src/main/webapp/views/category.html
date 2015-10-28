@@ -1,0 +1,216 @@
+<!-- Body Div-->
+<div id="main">
+  <!-- another main DIV-->
+  <div id="another-main">
+    <span style="display:hidden" id="top"></span>
+    <!-- header div -->
+    <!-- group the search boxes -->
+    <!--<div id="searchBar3" class="searchBar3">-->
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand visible-xs hidden-sm hidden-md hidden-lg" href="#">Kanbanizer</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <div class="btn-group btn-group-justified visible-xs hidden-sm hidden-md hidden-lg" style="margin-top:5px">
+            <a class="btn btn-default" onclick="window.open('https://jira.it.umich.edu/secure/CreateIssue!default.jspa')">+ ITS</a>
+            <a class="btn btn-default" onclick="window.open('https://jira.sakaiproject.org/secure/CreateIssue!default.jspa')">+ Sakai</a>
+            <a class="btn btn-default tlstaffbutton" id="" ng-click="switchIssueCollection('.tl')">T&LXXX</a>
+            <a class="btn btn-default allstaffbutton" id="" ng-click="switchIssueCollection('.all')">All</a>
+          </div>
+          <div class="container-fluid visible-xs hidden-sm hidden-md hidden-lg">
+            <div class="nav navbar-nav row">
+              <div class="col-xs-2 col-md-2" style="padding-left:0;padding-right:0">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                  <i class="glyphicon glyphicon-search"></i>
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" id="searchPicker" role="menu">
+                  <li>
+                    <small><a ng-click="assigneeSearchTxtMobile=true" href="" class="assigneeSearchTxt2">assignee</a></small>
+                  </li>
+                  <li>
+                    <small><a ng-click="prioritySearchTxtMobile=true" href="" class="prioritySearchTxt2"> priority</a></small>
+                  </li>
+                  <li>
+                    <small><a ng-click="reporterSearchTxtMobile=true"  href="" class="reporterSearchTxt2">reporter</a></small>
+                  </li>
+                  <li>
+                    <small><a ng-click="projectKeySearchTxtMobile=true" href="" class="projectKeySearchTxt2">key</a></small>
+                  </li>
+                  <li>
+                    <small><a ng-click="labelKeySearchTxtMobile=true" href="" class="labelKeySearchTxt2">label</a></small>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-xs-10 col-md-10 mobileSearch" style="padding-left:0;padding-right:0">
+                <span class="assigneeSearchTxt2" ng-show="assigneeSearchTxtMobile">
+                    <label for="assigneeSearchTxt2" class="sr-only">
+                        Search by assignee
+                    </label>
+                    <input ng-model="assigneeModel" id="assigneeSearchTxt2" name="assigneeSearch2" maxlength="50" type="text" placeholder="Search by assignee" class="form-control"/>
+                </span>
+                <span class="prioritySearchTxt2" ng-show="prioritySearchTxtMobile">
+                    <label for="prioritySearchTxt2" class="sr-only">
+                        Search by priority
+                    </label>
+                    <input ng-model="priorityModel" id="prioritySearchTxt2" name="prioritySearch2" maxlength="50" type="text" placeholder="Search by priority" class="form-control"/>
+                </span>
+                <span class="reporterSearchTxt2" ng-show="reporterSearchTxtMobile">
+                    <label for="reporterSearchTxt2" class="sr-only">
+                        Search by reporter
+                    </label>
+                    <input ng-model="reporterModel" id="reporterSearchTxt2" name="reporterSearch2" maxlength="50" type="text" placeholder="Search by reporter" class="form-control" ng-model="reporter"/>
+                </span>
+                <span class="projectKeySearchTxt2" ng-show="projectKeySearchTxtMobile">
+                    <label for="projectKeySearchTxt2" class="sr-only">
+                        Search by project key
+                    </label>
+                    <input ng-model="projectKeyModel" id="projectKeySearchTxt2" name="projectKeySearch2" maxlength="50" type="text" placeholder="Search by project key " class="form-control" />
+                </span>
+                <span class="labelKeySearchTxt2" ng-show="labelKeySearchTxtMobile">
+                    <label for="labelKeySearchTxt2" class="sr-only">
+                        Search by project key
+                    </label>
+                    <input ng-model="labelModel" id="labelKeySearchTxt2" name="labelKeySearchTxt2" maxlength="50" type="text" placeholder="Search by label" class="form-control" />
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="btn-group btn-group-justified visible-xs hidden-sm hidden-md hidden-lg" style="margin-top:5px">
+            <a class="btn btn-default" href="#body-li-todopanel">To Do</a>
+            <a class="btn btn-default" href="#body-li-inprogress">In Progress</a>
+            <a class="btn btn-default" href="#body-li-review">Review</a>
+          </div>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="searchFieldWrapperhidden-xs visible-sm visible-md visible-lg">
+                <div id="assigneeSearch" class="assigneeSearch  form-group">
+                  <label for="assigneeSearchTxt" class="sr-only">
+                    Search by assignee
+                  </label>
+                  <input id="assigneeSearchTxt" name="assigneeSearch" maxlength="50" type="text" placeholder="Search by assignee" ng-model="assigneeModel" />
+                </div>
+                <div id="prioritySearch" class="prioritySearch  form-group">
+                  <label for="prioritySearchTxt" class="sr-only">
+                    Search by priority
+                  </label>
+                  <input id="prioritySearchTxt" name="prioritySearch" maxlength="50" type="text" placeholder="Search by priority" ng-model="priorityModel" />
+                </div>
+                <div id="reporterSearch" class="reporterSearch  form-group">
+                  <label for="reporterSearchTxt" class="sr-only">
+                    Search by reporter
+                  </label>
+                  <input id="reporterSearchTxt" name="reporterSearch" maxlength="50" type="text" placeholder="Search by reporter" ng-model="reporterModel" />
+                </div>
+                <div id="projectKeySearch" class="projectKeySearch  form-group">
+                  <label for="projectKeySearch" class="sr-only">
+                    Search by project key
+                  </label>
+                  <input id="projectKeySearchTxt" name="projectKeySearch" maxlength="50" type="text" placeholder="Search by project key " ng-model="projectKeyModel" />
+                </div>
+                <div id="labelKeySearch" class="projectKeySearch  form-group">
+                  <label for="labelKeySearch" class="sr-only">
+                    Search by project key
+                  </label>
+                  <input id="labelKeySearchTxt" name="labelKeySearch" maxlength="50" type="text" placeholder="Search by label" ng-model="labelModel" />
+                  <button type="button" class="btn btn-primary btn-xs" style="margin-top:-2px" title="Using URLs with query strings" ng-click="isHelpPanelOpen = !isHelpPanelOpen">
+                    ?
+                  </button>
+                </div>
+              </div>
+            </div>
+            <p></p>
+            <div class="row">
+              <div class="col-md-12 hidden-xs visible-sm visible-md visible-lg">
+                <span id="createTicket" class="form-group">
+                    Create Issue
+                    <button type="button" class="btn btn-primary btn-xs" onclick="window.open('https://jira.it.umich.edu/secure/CreateIssue!default.jspa')">
+                        ITS Jira
+                    </button>
+                    <button type="button" class="btn btn-primary btn-xs" onclick="window.open('https://jira.sakaiproject.org/secure/CreateIssue!default.jspa')">
+                        Sakai Jira
+                    </button>
+                </span>
+                <span id="filterIssues" class="form-group">
+                    Filter Issues
+                    <button type="button" ng-class="sourceCollection ==='.tl' ? 'btn btn-xs btn-default' : 'btn btn-xs  btn-primary'" id="tlstaffbutton" ng-click="switchIssueCollection('.tl')">
+                        T&L Staff
+                    </button>
+                    <button type="button" ng-class="sourceCollection==='.all' ? 'btn btn-xs btn-default' : 'btn btn-xs  btn-primary'"   ng-click="switchIssueCollection('.all')">
+                        All Staff
+                    </button>
+                    
+                    <small id="" class="messageAllStaff text-muted" ng-show="sourceCollection==='.all'">
+                        - showing <b>All Staff</b>
+                    </small>
+                    <small id="" class="messageTlStaff text-muted" ng-show="sourceCollection==='.tl'">
+                        - showing <b>T&amp;L Staff</b>
+                    </small>
+                </span>
+                <p></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--/.nav-collapse -->
+      </div>
+      <!--/.container-fluid -->
+    </nav>
+  </div>
+  <div id="body-div" class="body-div">
+    <ul id="body-ul" class="list-group row">
+      <li id="body-li-todopanel" class="col-md-4 ToDoPanel">
+        <h4 class="titleStatus">To Do&nbsp;
+            <small>
+                <span ng-class="filteredToDos.length > wip[0].todo ? 'label label-danger' : 'label label-success'"id="cProgress2" >{{filteredToDos.length}}</span>&nbsp;
+                <span class="label label-default" id="cTodo1">{{wip[0].todo}}</span>
+            </small>
+            <a class="pull-right visible-xs hidden-sm hidden-md hidden-lg" href="#top"><i class="glyphicon glyphicon-arrow-up"></i><span class="sr-only">To top</span></a>
+        </h4>
+        <ul id="inner-body-ul-for-todopanel" class="list-group">
+          <li class="list-group-item" ng-repeat="issue in filteredToDos = (issues | filter:showTodos ) | filter: { assignee:assigneeModel, reporter:reporterModel, priority:priorityModel, projectKey:projectKeyModel, labelsFlat:labelModel}">
+            <div ng-jira-to-do></div>
+          </li>
+        </ul>
+      </li>
+      <li id="body-li-inprogress" class="col-md-4 InProgress">
+        <h4 class="titleStatus">In Progress&nbsp;
+            <small>
+                <span ng-class="filteredInProgress.length > wip[0].inprogress ? 'label label-danger' : 'label label-success'"id="cProgress2" >{{filteredInProgress.length}}</span>&nbsp;<span class="label label-default" id="cProgress1">{{wip[0].inprogress}}</span>
+            </small>
+            <a class="pull-right visible-xs hidden-sm hidden-md hidden-lg" href="#top"><i class="glyphicon glyphicon-arrow-up"></i><span class="sr-only">To top</span></a>
+        </h4>
+        <ul id="inner-body-ul-for-inprogress" class="list-group">
+          <li class="list-group-item" ng-repeat="issue in filteredInProgress = (issues | filter:showInProgress) | filter: { assignee:assigneeModel, reporter:reporterModel, priority:priorityModel, projectKey:projectKeyModel, labelsFlat:labelModel}">
+            <div ng-jira-in-progress></div>
+          </li>
+        </ul>
+      </li>
+      <li id="body-li-review" class="col-md-4 Review">
+        <h4 class="titleStatus">Review&nbsp;
+            <small>
+                <span class="label label-default"  ng-class="filteredInReview.length > wip[0].review  ? 'label label-danger' : 'label label-success'">{{filteredInReview.length}}</span>&nbsp;<span class="label label-default">{{wip[0].review}}</span>
+            </small>
+            <a class="pull-right visible-xs hidden-sm hidden-md hidden-lg" href="#top"><i class="glyphicon glyphicon-arrow-up"></i><span class="sr-only">To top</span></a>
+        </h4>
+        <ul id="inner-body-ul-for-review" class="list-group">
+          <li class="list-group-item" ng-repeat="issue in filteredInReview = (issues | filter:showInReview)  | filter: { assignee:assigneeModel, reporter:reporterModel, priority:priorityModel, projectKey:projectKeyModel, labelsFlat:labelModel}">
+            <div ng-jira-review></div>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <!-- Body Div-->
+</div>
+<!-- please wait while page is loading div -->
+<div id="wait-div" ng-show="loading">
+  <img src="images/ajax_loader_blue_128.gif" />
+</div>

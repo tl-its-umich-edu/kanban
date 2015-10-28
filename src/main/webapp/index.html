@@ -5,260 +5,46 @@
     	<meta name="viewport" content="initial-scale=1, maximum-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Kanban Board</title>
-        <meta name="author" content="Gundala, Pushyami" />
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/vendor/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/kanbancss.css" />
     </head>
-    <body>
-        <!-- main div-->
-        <div id="main">
-            <!-- another main DIV-->
-            <div id="another-main">
-            	<span style="display:hidden" id="top"></span>
-                <!-- header div --><!-- group the search boxes --><!--<div id="searchBar3" class="searchBar3">-->
-                <nav class="navbar navbar-default" role="navigation">
-                    <div class="container-fluid">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            <a class="navbar-brand visible-xs hidden-sm hidden-md hidden-lg" href="#">Kanbanizer</a>
-                        </div>
-                        <div class="navbar-collapse collapse">
-                            <div class="btn-group btn-group-justified visible-xs hidden-sm hidden-md hidden-lg" style="margin-top:5px">
-                                <a class="btn btn-default" onclick="window.open('https://jira.it.umich.edu/secure/CreateIssue!default.jspa')">+ ITS</a>
-                                <a class="btn btn-default" onclick="window.open('https://jira.sakaiproject.org/secure/CreateIssue!default.jspa')">+ Sakai</a>
-                                <a class="btn btn-default tlstaffbutton" id="">T&L</a>
-                                <a class="btn btn-default allstaffbutton" id="">All</a>
-                            </div>
-                            <div class="container-fluid visible-xs hidden-sm hidden-md hidden-lg">
-                                <div class="nav navbar-nav row">
-                                    <div class="col-xs-2 col-md-2" style="padding-left:0;padding-right:0">
-                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                            <i class="glyphicon glyphicon-search"></i>
-                                            <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu" id="searchPicker" role="menu">
-                                            <li>
-                                                <a href="#" class="txtSearch2">on page</a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="assigneeSearchTxt2">by assignee</a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="prioritySearchTxt2">by priority</a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="reporterSearchTxt2">by reporter</a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="projectKeySearchTxt2">by key</a>
-                                            </li>
-                                            <li>
-                                                <a href="#" class="labelKeySearchTxt2">by label</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-xs-10 col-md-10 mobileSearch" style="padding-left:0;padding-right:0">
-                                        <span class="txtSearch2" style="display:none">
-                                            <label for="txtSearch2" class="sr-only">
-                                                Search on the page
-                                            </label>
-                                            <input id="txtSearch2" name="txtSearch2" maxlength="50" type="text" placeholder="Search on the page " class="form-control"/></span><span class="assigneeSearchTxt2">
-                                            <label for="assigneeSearchTxt2" class="sr-only">
-                                                Search by assignee
-                                            </label>
-                                            <input id="assigneeSearchTxt2" name="assigneeSearch2" maxlength="50" type="text" placeholder="Search by assignee" class="form-control"/></span><span class="prioritySearchTxt2" style="display:none">
-                                            <label for="prioritySearchTxt2" class="sr-only">
-                                                Search by priority
-                                            </label>
-                                            <input id="prioritySearchTxt2" name="prioritySearch2" maxlength="50" type="text" placeholder="Search by priority" class="form-control"/></span><span class="reporterSearchTxt2" style="display:none">
-                                            <label for="reporterSearchTxt2" class="sr-only">
-                                                Search by reporter
-                                            </label>
-                                            <input id="reporterSearchTxt2" name="reporterSearch2" maxlength="50" type="text" placeholder="Search by reporter" class="form-control"/></span><span class="projectKeySearchTxt2" style="display:none">
-                                            <label for="projectKeySearchTxt2" class="sr-only">
-                                                Search by project key
-                                            </label>
-                                            <input id="projectKeySearchTxt2" name="projectKeySearch2" maxlength="50" type="text" placeholder="Search by project key " class="form-control" /></span><span class="labelKeySearchTxt2" style="display:none">
-                                            <label for="labelKeySearchTxt2" class="sr-only">
-                                                Search by project key
-                                            </label>
-                                            <input id="labelKeySearchTxt2" name="labelKeySearchTxt2" maxlength="50" type="text" placeholder="Search by label" class="form-control" /></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="btn-group btn-group-justified visible-xs hidden-sm hidden-md hidden-lg" style="margin-top:5px">
-                                <a class="btn btn-default" href="#body-li-todopanel">To Do</a>
-								<a class="btn btn-default" href="#body-li-inprogress">In Progress</a>
-								<a class="btn btn-default" href="#body-li-review">Review</a>
-                            </div>
-
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="searchFieldWrapperhidden-xs visible-sm visible-md visible-lg">
-                                        <div id="otherSiteSearch" class="otherSiteSearch form-group">
-                                            <label for="txtSearch" class="sr-only">
-                                                Search on the page
-                                            </label>
-                                            <input id="txtSearch" name="txtSearch" maxlength="50" type="text" placeholder="Search on the page "/>
-                                        </div>
-                                        <div id="assigneeSearch" class="assigneeSearch  form-group">
-                                            <label for="assigneeSearchTxt" class="sr-only">
-                                                Search by assignee
-                                            </label>
-                                            <input id="assigneeSearchTxt" name="assigneeSearch" maxlength="50" type="text" placeholder="Search by assignee"/>
-                                        </div>
-                                        <div id="prioritySearch" class="prioritySearch  form-group">
-                                            <label for="prioritySearchTxt" class="sr-only">
-                                                Search by priority
-                                            </label>
-                                            <input id="prioritySearchTxt" name="prioritySearch" maxlength="50" type="text" placeholder="Search by priority"/>
-                                        </div>
-                                        <div id="reporterSearch" class="reporterSearch  form-group">
-                                            <label for="reporterSearchTxt" class="sr-only">
-                                                Search by reporter
-                                            </label>
-                                            <input id="reporterSearchTxt" name="reporterSearch" maxlength="50" type="text" placeholder="Search by reporter"/>
-                                        </div>
-                                        <div id="projectKeySearch" class="projectKeySearch  form-group">
-                                            <label for="projectKeySearch" class="sr-only">
-                                                Search by project key
-                                            </label>
-                                            <input id="projectKeySearchTxt" name="projectKeySearch" maxlength="50" type="text" placeholder="Search by project key "/>
-                                        </div>
-                                        <div id="labelKeySearch" class="projectKeySearch  form-group">
-                                            <label for="labelKeySearch" class="sr-only">
-                                                Search by project key
-                                            </label>
-                                            <input id="labelKeySearchTxt" name="labelKeySearch" maxlength="50" type="text" placeholder="Search by label"/>
-                                            <button type="button" class="btn btn-primary btn-xs" style="margin-top:-2px" id="helpPanelControl" title="Using URLs with query strings">
-                                                ?
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-								<p></p>
-                                <div class="row">
-                                    <div class="col-md-12 hidden-xs visible-sm visible-md visible-lg">
-                                        <span id="createTicket" class="form-group">
-                                            Create Issue
-                                            <button type="button" class="btn btn-primary btn-xs" onclick="window.open('https://jira.it.umich.edu/secure/CreateIssue!default.jspa')">
-                                                ITS Jira
-                                            </button>
-                                            <button type="button" class="btn btn-primary btn-xs" onclick="window.open('https://jira.sakaiproject.org/secure/CreateIssue!default.jspa')">
-                                                Sakai Jira
-                                            </button>
-                                        </span>
-                                        <span id="filterIssues" class="form-group">
-                                            Filter Issues
-                                            <button type="button" class="btn btn-default btn-xs tlstaffbutton">
-                                                T&L Staff
-                                            </button>
-                                            <button type="button" class="btn btn-default btn-xs allstaffbutton">
-                                                All Staff
-                                            </button>
-                                            <small id="" class="messageAllStaff text-muted" style="display:none">
-                                                - showing <b>All Staff</b>
-                                            </small>
-                                            <small id="" class="messageTlStaff text-muted" style="display:none">
-                                                - showing <b>T&amp;L Staff</b>
-                                            </small>
-                                        </span>
-										<p></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--/.nav-collapse -->
-                    </div>
-                    <!--/.container-fluid -->
-                </nav>
-            </div>
-            <div id="body-div" class="body-div">
-                <ul id="body-ul" class="list-group row">
-                    <li id="body-li-todopanel" class="col-md-4 ToDoPanel">
-                        <h4 class="titleStatus">To Do&nbsp; 
-                            <small>
-                                <span class="label label-default" id="cTodo1"></span>&nbsp;<span class="label label-default" id="cTodo2"></span>
-                            </small>
-							<a class="pull-right visible-xs hidden-sm hidden-md hidden-lg" href="#top"><i class="glyphicon glyphicon-arrow-up"></i><span class="sr-only">To top</span></a>
-                        </h4>
-                        <ul id="inner-body-ul-for-todopanel" class="list-group">
-                        </ul>
-                    </li>
-                    <li id="body-li-inprogress" class="col-md-4 InProgress">
-                        <h4 class="titleStatus">In Progress&nbsp;
-                            <small>
-                                <span class="label label-default" id="cProgress1"></span>&nbsp;<span class="label label-default" id="cProgress2"></span>
-                            </small>
-							<a class="pull-right visible-xs hidden-sm hidden-md hidden-lg" href="#top"><i class="glyphicon glyphicon-arrow-up"></i><span class="sr-only">To top</span></a>
-                        </h4>
-                        <ul id="inner-body-ul-for-inprogress" class="list-group">
-                        </ul>
-                    </li>
-                    <li id="body-li-review" class="col-md-4 Review">
-                        <h4 class="titleStatus">Review&nbsp;
-                            <small>
-                                <span class="label label-default" id="cReview1"></span>&nbsp;<span class="label label-default" id="cReview2"></span>
-                            </small>
-							<a class="pull-right visible-xs hidden-sm hidden-md hidden-lg" href="#top"><i class="glyphicon glyphicon-arrow-up"></i><span class="sr-only">To top</span></a>
-                        </h4>
-                        <ul id="inner-body-ul-for-review" class="list-group">
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <!-- Body Div-->
+    <body ng-app="kanban"  ng-controller="kanbanController" ng-cloak>
+        <div class="alert alert-danger alertTop" ng-show="errors">
+            <p> We asked for: <strong>{{errors.url}}</strong></p>
+            <p> We got back a nasty <strong>{{errors.status}}</strong></p>
+            <p>So as a result we are unable to <strong>{{errors.message}}</strong></p>
+            <p>Sorry.</p>
         </div>
-        <!-- main div-->
-        <!-- please wait while page is loading div -->
-        <div id="wait-div">
-            <img src="images/ajax_loader_blue_128.gif"/>
-        </div><!-- Body Div-->
-
-        <div id="helpPanel" class="alert alert-info alert-dismissable" style="display:none">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-                &times;
-            </button>
-            <h5>Searching with queries</h5>
-            <p>
-                Append the following to a URL:
-            </p>
-            <p>
-                Search page:
-                ?txtSearch=xxxxxx
-            </p>
-            <p>
-                Search assignee:
-                ?assigneeSearchTxt=xxxxxx
-            </p>
-            <p>
-                Search priority:
-                ?prioritySearchTxt=xxxxxx
-            </p>
-            <p>
-                Search reporter:
-                ?reporterSearchTxt=xxxxxx
-            </p>
-            <p>
-                Search project key:
-                ?projectKeySearchTxt=xxxxxx
-            </p>
-            <p>
-                Search label:
-                ?labelKeySearchTxt=xxxxxx
-            </p>
+        <div style="position:absolute;right:10px;top:11px;z-index:100" class="hidden-xs hidden-sm">     
+            <input type="text" id="searchInPage" value="" placeholder="Search in page">
         </div>
-        <script type="text/javascript" src="js/jquery-2.1.1.min.js">
-        </script>
-        <script type="text/javascript" src="js/bootstrap.js">
-        </script>
-        <script src="js/global.js" type="text/javascript">
+        <div ng-view></div>
+
+        <script type="text/javascript" src="js/vendor/jquery-2.1.1.min.js">
         </script>
 
+        <script type="text/javascript" src="js/vendor/bootstrap.js">
+        </script>
+
+        <script type="text/javascript" src="js/vendor/angular.min.js">
+        </script>
+        <script type="text/javascript" src="js/vendor/angular-route.min.js">
+        </script>
+
+        <script type="text/javascript" src="js/vendor/underscore-min.js">
+        </script>
+        <script src="js/angularApp/app.js" type="text/javascript">
+        </script>
+        <script src="js/angularApp/controllers.js" type="text/javascript">
+        </script>
+        <script src="js/angularApp/factories.js" type="text/javascript">
+        </script>
+        <script type="text/javascript" src="js/angularApp/directives.js">
+        </script>        
+        <script src="js/angularApp/filters.js" type="text/javascript">
+        </script>
+        <script src="js/angularApp/utils.js" type="text/javascript">
+        </script>
+        </div>
     </body>
 </html>

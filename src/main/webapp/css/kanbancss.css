@@ -144,9 +144,17 @@ color:#716B7A;
     padding:0 3px;
     margin-top:10px
 }
-#helpPanel {
-    position:fixed;
+#helpPanel, #buildUrl {
+    position:absolute;
     top:40px;
-    left:0;
+    right:0;
     z-index:1;
+    right:20%;
+}
+.alertTop {
+    position:absolute;
+    top:150px;
+    z-index:2;
+    left:25%;
+    right:25%;
 }

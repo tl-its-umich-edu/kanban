@@ -1,0 +1,6 @@
+<a target="_blank" href="{{issue.url}}">{{issue.title}}</a>
+<br/><span class="priority-style">Priority: {{issue.priority}}</span>
+<br/><span class="component-style" ng-if="issue.component">Component: {{issue.component}}<br/></span><span class="assignee-style">Assignee: {{issue.assignee}}</span>
+<br/><span class="reporter-style">Reporter: {{issue.reporter}}</span>
+<br/><span class="version-style" ng-if="issue.fixVersion">Fix Version: {{issue.fixVersion}}<br/></span>
+<div ng-repeat="label in issue.labels" style="display:inline-block"><span class="label-style label label-info">{{label.label}}</span>&nbsp;</div>
