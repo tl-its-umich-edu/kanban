@@ -173,7 +173,14 @@
       <li id="body-li-todopanel" class="col-md-4 ToDoPanel">
         <h4 class="titleStatus">To Do&nbsp;
             <small ng-if="issues">
-                <span class="label label-success" id="todo">{{(issues | filter:showToDos | filter: { assignee:assigneeModel, reporter:reporterModel, priority:priorityModel, projectKey:projectModel, labelsFlat:labelModel}).length}}<span ng-show="(issues | filter:showToDos | filter: { assignee:assigneeModel, reporter:reporterModel, priority:priorityModel, projectKey:projectModel, labelsFlat:labelModel}).length  < (issues | filter:showInToDos).length">/{{(issues | filter:showToDos).length}}</span></span> &nbsp;<span class="label label-default" id="cTodo1">NA</span>
+              <span class="label label-success" id="todo">{{
+                (issues | filter:showToDos | filter: { assignee:assigneeModel, reporter:reporterModel, priority:priorityModel, projectKey:projectModel, labelsFlat:labelModel}).length -
+                (issues | filter:showInProgress | filter: { assignee:assigneeModel, reporter:reporterModel, priority:priorityModel, projectKey:projectModel, labelsFlat:labelModel}).length -
+                (issues | filter:showInReview | filter: { assignee:assigneeModel, reporter:reporterModel, priority:priorityModel, projectKey:projectModel, labelsFlat:labelModel}).length
+                }}
+                <span ng-show="(issues | filter:showToDos | filter: { assignee:assigneeModel, reporter:reporterModel, priority:priorityModel, projectKey:projectModel, labelsFlat:labelModel}).length  < (issues | filter:showToDos).length">/{{(issues | filter:showToDos).length - (issues | filter:showInProgress).length - (issues | filter:showInReview).length}}</span>
+              </span>
+               &nbsp;<span class="label label-default" id="cTodo1">NA</span>
             </small>
             <a class="pull-right visible-xs hidden-sm hidden-md hidden-lg" href="#top"><i class="glyphicon glyphicon-arrow-up"></i><span class="sr-only">To top</span></a>
         </h4>
