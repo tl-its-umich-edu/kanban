@@ -84,9 +84,9 @@
             </div>
           </div>
           <div class="btn-group btn-group-justified visible-xs hidden-sm hidden-md hidden-lg" style="margin-top:5px">
-            <a class="btn btn-default" href="#body-li-todopanel">To Do</a>
-            <a class="btn btn-default" href="#body-li-inprogress">In Progress</a>
-            <a class="btn btn-default" href="#body-li-review">Review</a>
+            <a class="btn btn-default goto" data-href="body-li-todopanel">To Do</a>
+            <a class="btn btn-default goto" data-href="body-li-inprogress">In Progress</a>
+            <a class="btn btn-default goto" data-href="body-li-review">Review</a>
           </div>
           <div class="container-fluid">
             <div class="row">
@@ -150,7 +150,7 @@
                     <button type="button" ng-disabled ="sourceCollection ==='.all'" class="btn btn-xs btn-default"  ng-click="switchIssueCollection('.all')">
                         All Staff
                     </button>
-                    
+
                     <small id="" class="messageAllStaff text-muted" ng-show="sourceCollection==='.all'">
                         - showing <b>All Staff</b>
                     </small>
@@ -182,7 +182,7 @@
               </span>
                &nbsp;<span class="label label-default" id="cTodo1">NA</span>
             </small>
-            <a class="pull-right visible-xs hidden-sm hidden-md hidden-lg" href="#top"><i class="glyphicon glyphicon-arrow-up"></i><span class="sr-only">To top</span></a>
+            <button class="pull-right visible-xs hidden-sm hidden-md hidden-lg goto btn-link" data-href="top"><i class="glyphicon glyphicon-arrow-up"></i><span class="sr-only">To top</span></button>
         </h4>
         <ul id="inner-body-ul-for-todopanel" class="list-group">
           <li class="list-group-item" ng-repeat="issue in filteredToDos = (issues | filter:showTodos ) | filter: { assignee:assigneeModel, reporter:reporterModel, priority:priorityModel, projectKey:projectModel, labelsFlat:labelModel}">
@@ -195,7 +195,7 @@
             <small ng-if="issues">
                 <span ng-class="(issues | filter:showInProgress).length  > wip[0].inprogress ? 'label label-danger' : 'label label-success'"id="cProgress2" >{{(issues | filter:showInProgress | filter: { assignee:assigneeModel, reporter:reporterModel, priority:priorityModel, projectKey:projectModel, labelsFlat:labelModel}).length}}<span ng-show="(issues | filter:showInProgress | filter: { assignee:assigneeModel, reporter:reporterModel, priority:priorityModel, projectKey:projectModel, labelsFlat:labelModel}).length  < (issues | filter:showInProgress).length">/{{(issues | filter:showInProgress).length}}</span></span> &nbsp;<span class="label label-default" id="cProgress1">{{wip[0].inprogress}}</span>
             </small>
-            <a class="pull-right visible-xs hidden-sm hidden-md hidden-lg" href="#top"><i class="glyphicon glyphicon-arrow-up"></i><span class="sr-only">To top</span></a>
+            <button class="btn-link pull-right visible-xs hidden-sm hidden-md hidden-lg goto" data-href="top"><i class="glyphicon glyphicon-arrow-up"></i><span class="sr-only">To top</span></button>
         </h4>
         <ul id="inner-body-ul-for-inprogress" class="list-group">
           <li class="list-group-item" ng-repeat="issue in filteredInProgress = (issues | filter:showInProgress) | filter: { assignee:assigneeModel, reporter:reporterModel, priority:priorityModel, projectKey:projectModel, labelsFlat:labelModel}">
@@ -208,7 +208,7 @@
             <small ng-if="issues">
                 <span class="label label-default"  ng-class="(issues | filter:showInReview).length > wip[0].review  ? 'label label-danger' : 'label label-success'">{{(issues | filter:showInReview | filter: { assignee:assigneeModel, reporter:reporterModel, priority:priorityModel, projectKey:projectModel, labelsFlat:labelModel}).length}}<span ng-show="(issues | filter:showInReview | filter: { assignee:assigneeModel, reporter:reporterModel, priority:priorityModel, projectKey:projectModel, labelsFlat:labelModel}).length  < (issues | filter:showInReview).length">/{{(issues | filter:showInReview).length}}</span></span>&nbsp;<span class="label label-default">{{wip[0].review}}</span>
             </small>
-            <a class="pull-right visible-xs hidden-sm hidden-md hidden-lg" href="#top"><i class="glyphicon glyphicon-arrow-up"></i><span class="sr-only">To top</span></a>
+            <button class="btn-link pull-right visible-xs hidden-sm hidden-md hidden-lg goto" data-href="top"><i class="glyphicon glyphicon-arrow-up"></i><span class="sr-only">To top</span></button>
         </h4>
         <ul id="inner-body-ul-for-review" class="list-group">
           <li class="list-group-item" ng-repeat="issue in filteredInReview = (issues | filter:showInReview)  | filter: { assignee:assigneeModel, reporter:reporterModel, priority:priorityModel, projectKey:projectModel, labelsFlat:labelModel}">
@@ -237,7 +237,7 @@
         ie. search for assignee:
         <code>?assignee=ckre</code>
     </p>
-    <p> 
+    <p>
       You can use <code>assignee, priority, reporter, project, label</code>
     </p>
     <p>
@@ -269,8 +269,8 @@
       </div>
       <div class="col-lg-2 col-md-2 col-sm-2">
         <strong class="pull-right"><button class="btn btn-default btn-xs" ng-click="removeFilter($index)">&times;</button></strong>
-      </div>  
-      
+      </div>
+
       </li>
     </ul>
   </div>

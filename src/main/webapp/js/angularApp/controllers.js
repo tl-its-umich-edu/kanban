@@ -1,5 +1,5 @@
 'use strict';
-/* global kanban, _, $, angular */
+/* global kanban, _, $, angular, localStorage, window */
 
 kanban.controller('kanbanController', ['Issues', '$rootScope', '$scope', '$timeout', '$parse', function(Issues, $rootScope, $scope, $timeout, $parse) {
 
@@ -16,7 +16,7 @@ kanban.controller('kanbanController', ['Issues', '$rootScope', '$scope', '$timeo
   // what collection is being shown is stored in the root scope
   // not used now but might come in handy later
   //var issuesUrl = '/jirarequest?' + $rootScope.sourceCollection;
-  
+
   if(!$scope.wip){
     var wipUrl='/jirarequest?wip';
     // use a factory as a promise to get WIP data
@@ -43,9 +43,9 @@ kanban.controller('kanbanController', ['Issues', '$rootScope', '$scope', '$timeo
     $scope.loading = true;
     $scope.errors ={};
     var issuesUrl = '/jirarequest?' + collectionParam;
-    
+
     $rootScope.sourceCollection = collectionParam;
-    
+
     // use factory promise to get data
     Issues.getIssues(issuesUrl).then(function(result) {
       if(result.errors) {
@@ -56,7 +56,7 @@ kanban.controller('kanbanController', ['Issues', '$rootScope', '$scope', '$timeo
           //source error: do something
         } else {
           if (result.errors) {
-            
+
             //angular error: do something
           } else {
             // adding the issues to the scope
@@ -107,7 +107,7 @@ kanban.controller('kanbanController', ['Issues', '$rootScope', '$scope', '$timeo
 
   $scope.useFilter = function(filter){
     window.location = window.location.origin + filter;
-  }
+  };
 
   $scope.removeFilter = function ( idx ) {
     var filterToDelete = $scope.savedFilters[idx];
@@ -133,7 +133,5 @@ kanban.controller('kanbanController', ['Issues', '$rootScope', '$scope', '$timeo
     }
     localStorage.setItem('kanbanFilters', current.join(','));
     $scope.savedFilters = localStorage.getItem('kanbanFilters').split(',');
-  }
+  };
 }]);
-
-
