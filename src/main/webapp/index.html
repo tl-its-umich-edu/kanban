@@ -7,6 +7,9 @@
         <title>Kanban Board</title>
         <link rel="stylesheet" type="text/css" href="css/vendor/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/kanbancss.css" />
+        <script type="text/javascript">
+          window.location.href = "https://itsjira.umms.med.umich.edu/secure/RapidBoard.jspa?rapidView=296&quickFilter=1787"
+        </script>
     </head>
     <body ng-app="kanban"  ng-controller="kanbanController" ng-cloak>
         <div class="alert alert-danger alertTop" ng-show="errors">
@@ -15,7 +18,7 @@
             <p>So as a result we are unable to <strong>{{errors.message}}</strong></p>
             <p>Sorry.</p>
         </div>
-        <div style="position:absolute;right:10px;top:11px;z-index:100" class="hidden-xs hidden-sm">     
+        <div style="position:absolute;right:10px;top:11px;z-index:100" class="hidden-xs hidden-sm">
             <input type="text" id="searchInPage" value="" placeholder="Search in page">
         </div>
         <div ng-view></div>
@@ -40,7 +43,7 @@
         <script src="js/angularApp/factories.js" type="text/javascript">
         </script>
         <script type="text/javascript" src="js/angularApp/directives.js">
-        </script>        
+        </script>
         <script src="js/angularApp/filters.js" type="text/javascript">
         </script>
         <script src="js/angularApp/utils.js" type="text/javascript">
